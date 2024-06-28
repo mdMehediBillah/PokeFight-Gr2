@@ -9,20 +9,22 @@ import DetailPage from "./pages/DetailPage/DetailPage";
 import AllPoke from "./pages/AllPoke/AllPoke";
 import ScorePage from "./pages/ScorePage/ScorePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
+import "./App.css";
+import Header from "./components/Header";
+import PokeCard from "./components/PokeCard";
+import PokeCardFight from "./components/PokeCardFight";
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/allpokes" element={<AllPoke />} />
-          <Route path="/allpokes/:id" element={<DetailPage />} />
-          <Route path="/gameplay" element={<Gamepage />} />
-          <Route path="/score" element={<ScorePage />} />
-        </Routes>
-      </BrowserRouter>
+      <div className="App">
+        <h1>Hello World</h1>
+        <Header />
+        <PokeCard />
+        <PokeCardFight />
+        <Footer />
+      </div>
     </>
   );
 }
