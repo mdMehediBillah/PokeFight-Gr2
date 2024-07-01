@@ -1,26 +1,20 @@
+import connectDB from "./db/db.js";
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 
+// importing routes
 import userRouter from "./Routes/pokeRoutes/index.js";
 
+// create application from express
 const app = express();
-dotenv.config();
 app.use(cors({ origin: "*" }));
-
-// for database connection json file
 app.use(express.json());
+dotenv.config();
+connectDB();
 
-// routes
+// End points
 app.use("/api/v1/users", userRouter);
-
-// testing routes
-app.get("/", (req, res) => {
-  res.send("Hello World");
-});
-app.get("/*", (req, res) => {
-  res.send("Wrong url");
-});
 
 // app listening port
 const PORT = process.env.PORT || 8080;
