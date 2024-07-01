@@ -1,16 +1,88 @@
-// templete code
-export const getAll = (req, res) => {
-  res.send("This is all users");
+import UserModel from "../../models/pokeUserModel.js";
+import { validationResult } from "express-validator";
+
+//===========================
+// get all user and query by name and type
+//===========================
+
+export const getAll = async (req, res) => {
+  try {
+    const pokeUser = await UserModel.find();
+
+    res.status(200).json(pokeUser);
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error", error });
+  }
 };
-export const getOne = (req, res) => {
-  res.send("This is one users");
+
+//===========================
+// Create one single user
+//===========================
+
+export const createOne = async (req, res) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    const user = new UserModel(req.body);
+    const createdUser = await user.save();
+    res.status(201).json(createdUser);
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error", error });
+  }
 };
-export const createOne = (req, res) => {
-  res.send("This is create one users");
+
+//===========================
+// Get one single user
+//===========================
+
+export const getOne = async (req, res) => {
+  try {
+    const user = await UserModel.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error", error });
+  }
 };
-export const updateOne = (req, res) => {
-  res.send("This is update one users");
+
+//===========================
+// Update one single user
+//===========================
+
+export const updateOne = async (req, res) => {
+  try {
+    const user = await UserModel.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.json(user);
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.message });
+  }
 };
-export const deletOne = (req, res) => {
-  res.send("This is delete one users");
+
+//===========================
+// Delete One
+//===========================
+
+export const deletOne = async (req, res) => {
+  try {
+    const user = await UserModel.findByIdAndDelete(req.params.id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error", error });
+  }
 };

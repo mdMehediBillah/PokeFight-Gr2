@@ -1,3 +1,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --bgDark: #0d1b2a;
+  --bgMedium: #1b263b;
+  --grayMedium: #415a77;
+  --grayDark: #21344b;
+  --grayLight: #e0e1dd;
+  --bgLight: #778da9;
+  --bgLightest: #f4f4f4;
+  --textDark: #0f0f0f;
+  --textLight: #f4f4f4;
+  --brandColor: #17bbd7;
+  --brandColorDark: #0d808a;
+  --brandColorLightest: #fffaf1;
+  --brandColorLight: #bdeded;
+  --SuccessColor: #38b000;
+  --warningColor: #00b4d8;
+  --errorColor: #d90429;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background-color: var(--grayDark);
+}
