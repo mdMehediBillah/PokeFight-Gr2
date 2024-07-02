@@ -1,28 +1,41 @@
-import React from "react";
-import { useFormik } from "formik";
-import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import backgroundImage from "../assets/signUpBg.jpg";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { URL } from "../utils/myLocalURL.js";
 
 const Login = () => {
   const navigate = useNavigate();
 
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-    },
-    validationSchema: Yup.object({
-      email: Yup.string().email("Invalid email address").required("Required"),
-      password: Yup.string()
-        .min(6, "Must be at least 6 characters")
-        .required("Required"),
-    }),
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-      navigate(`/`);
-    },
-  });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleReset = () => {
+    setEmail("");
+    setPassword("");
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const newUser = {
+        email,
+        password,
+      };
+      const { data } = await axios.post(
+        `${URL}/login`,
+
+        newUser
+      );
+
+      toast.success("Login successfully!");
+      handleReset();
+      navigate("/home");
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
 
   return (
     <div
@@ -32,57 +45,51 @@ const Login = () => {
       }}
     >
       <div
-        className="text-yellow-500 p-8 rounded shadow-md w-full max-w-md"
+        className="text-white p-8 rounded shadow-md w-full max-w-md "
         style={{
-          background: "rgba(102,224,2,0.2)",
+          background: "rgba(10,80,100,0.6)",
           WebkitBackdropFilter: "blur(5px)",
           backdropFilter: "blur(5px)",
           border: "1px solid rgba(102,224,2,0.1)",
         }}
       >
-        <h2 className="text-2xl font-bold mb-4">Login</h2>
-        <form onSubmit={formik.handleSubmit}>
+        <h2 className="text-3xl font-bold mb-6 text-center">Login</h2>
+        <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-yellow-400 text-left">Email</label>
+            <label className="block text-white text-left text-sm">Email</label>
             <input
               type="email"
               name="email"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.email}
-              className="mt-1 p-2 w-full border rounded"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
+              className="mt-1 p-2 w-full border rounded outline-none text-black"
             />
-            {formik.touched.email && formik.errors.email ? (
-              <div className="text-red-500 text-sm">{formik.errors.email}</div>
-            ) : null}
           </div>
           <div className="mb-4">
-            <label className="block text-yellow-400 text-left">Password</label>
+            <label className="block text-white text-left text-sm">
+              Password
+            </label>
             <input
               type="password"
               name="password"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.password}
-              className="mt-1 p-2 w-full border rounded"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+              className="mt-1 p-2 w-full border rounded outline-none text-black"
             />
-            {formik.touched.password && formik.errors.password ? (
-              <div className="text-red-500 text-sm">
-                {formik.errors.password}
-              </div>
-            ) : null}
           </div>
           <button
             type="submit"
-            className="w-full bg-yellow-400 text-green-700 p-2 rounded mt-4 font-bold"
+            className="w-full bg-yellow-300 text-black p-2 rounded mt-4 font-bold hover:bg-orange-400"
           >
             Login
           </button>
         </form>
-        <p className="text-center text-yellow-500 mt-4">
+        <p className="text-center text-white mt-4 text-sm">
           Don't have an account?{" "}
-          <Link to="/signup" className="text-yellow-300 underline">
-            Sign up here
+          <Link to="/signup" className="text-white  pl-2 hover:underline">
+            Sign up
           </Link>
         </p>
       </div>

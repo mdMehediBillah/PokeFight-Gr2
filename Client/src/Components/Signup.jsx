@@ -1,36 +1,61 @@
-import React from "react";
-import { useFormik } from "formik";
-import * as Yup from "yup";
 import backgroundImage from "../assets/signUpBg.jpg";
 import { Link, useNavigate } from "react-router-dom";
+
+import { useState } from "react";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { URL } from "../utils/myLocalURL.js";
 
 const Signup = () => {
   const navigate = useNavigate();
 
-  const formik = useFormik({
-    initialValues: {
-      firstname: "",
-      lastname: "",
+  const [formData, setFormData] = useState({
+    first_name: "",
+    last_name: "",
+    email: "",
+    password: "",
+  });
+
+  const { first_name, last_name, email, password } = formData;
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleReset = () => {
+    setFormData({
+      first_name: "",
+      last_name: "",
       email: "",
       password: "",
-      confirmPassword: "",
-    },
-    validationSchema: Yup.object({
-      firstname: Yup.string().required("Required"),
-      lastname: Yup.string().required("Required"),
-      email: Yup.string().email("Invalid email address").required("Required"),
-      password: Yup.string()
-        .min(6, "Must be at least 6 characters")
-        .required("Required"),
-      confirmPassword: Yup.string()
-        .oneOf([Yup.ref("password"), null], "Passwords must match")
-        .required("Required"),
-    }),
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const newProduct = {
+        first_name,
+        last_name,
+        email,
+        password,
+      };
+      const { data } = await axios.post(
+        `${URL}/users`,
+
+        newProduct
+      );
+      toast.success("SignUp successfully!");
+      handleReset();
       navigate("/login");
-    },
-  });
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
 
   return (
     <div
@@ -40,114 +65,81 @@ const Signup = () => {
       }}
     >
       <div
-        className="text-yellow-500 p-8 rounded shadow-md w-full max-w-md"
+        className="text-white p-8 rounded shadow-md w-full max-w-md my-8"
         style={{
-          background: "rgba(102,224,2,0.2)",
+          background: "rgba(10,80,100,0.6)",
           WebkitBackdropFilter: "blur(5px)",
           backdropFilter: "blur(5px)",
           border: "1px solid rgba(102,224,2,0.1)",
         }}
       >
-        <h2 className="text-2xl font-bold mb-6">Sign Up</h2>
-        <form onSubmit={formik.handleSubmit}>
+        <h2 className="text-3xl font-bold mb-6 text-center">Sign Up</h2>
+        <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-yellow-400 text-left">
+            <label className="block text-white text-left text-sm">
               First Name
             </label>
             <input
-              type="firstname"
-              name="firstname"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.firstname}
-              className="mt-1 p-2 w-full border rounded"
+              type="text"
+              name="first_name"
+              onChange={handleChange}
+              value={first_name}
+              placeholder="First Name"
+              className="mt-1 p-2 w-full border rounded outline-none text-black"
             />
-            {formik.touched.firstname && formik.errors.firstname ? (
-              <div className="text-red-500 text-sm">
-                {formik.errors.firstname}
-              </div>
-            ) : null}
           </div>
 
           <div className="mb-4">
-            <label className="block text-yellow-400 text-left">Last Name</label>
+            <label className="block text-white text-left text-sm">
+              Last Name
+            </label>
             <input
-              type="lastname"
-              name="lastname"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.lastname}
-              className="mt-1 p-2 w-full border rounded"
+              type="text"
+              name="last_name"
+              onChange={handleChange}
+              value={last_name}
+              placeholder="Last Name"
+              className="mt-1 p-2 w-full border rounded outline-none text-black"
             />
-            {formik.touched.firstname && formik.errors.lastname ? (
-              <div className="text-red-500 text-sm">
-                {formik.errors.lastname}
-              </div>
-            ) : null}
           </div>
 
           <div className="mb-4">
-            <label className="block text-yellow-400 text-left">Email</label>
+            <label className="block text-white text-left text-sm">Email</label>
             <input
               type="email"
               name="email"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.email}
-              className="mt-1 p-2 w-full border rounded"
+              onChange={handleChange}
+              value={email}
+              placeholder="Email"
+              className="mt-1 p-2 w-full border rounded outline-none text-black"
             />
-            {formik.touched.email && formik.errors.email ? (
-              <div className="text-red-500 text-sm">{formik.errors.email}</div>
-            ) : null}
           </div>
 
           <div className="mb-4">
-            <label className="block text-yellow-400 text-left">Password</label>
-            <input
-              type="password"
-              name="password"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.password}
-              className="mt-1 p-2 w-full border rounded"
-            />
-            {formik.touched.password && formik.errors.password ? (
-              <div className="text-red-500 text-sm">
-                {formik.errors.password}
-              </div>
-            ) : null}
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-yellow-400 text-left">
-              Confirm Password
+            <label className="block text-white text-left text-sm">
+              Password
             </label>
             <input
               type="password"
-              name="confirmPassword"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.confirmPassword}
-              className="mt-1 p-2 w-full border rounded"
+              name="password"
+              onChange={handleChange}
+              value={password}
+              placeholder="Password"
+              className="mt-1 p-2 w-full border rounded outline-none text-black"
             />
-            {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
-              <div className="text-red-500 text-sm">
-                {formik.errors.confirmPassword}
-              </div>
-            ) : null}
           </div>
 
           <button
             type="submit"
-            className="w-full bg-yellow-400 text-green-700 p-2 rounded mt-4 font-bold"
+            className="w-full bg-yellow-300 text-black p-2 rounded mt-4 font-bold hover:bg-orange-400"
           >
             Submit
           </button>
         </form>
-        <p className="text-center text-yellow-500 mt-4">
+        <p className="text-center text-white mt-4 text-sm">
           Already have an account?{" "}
-          <Link to="/login" className="text-yellow-300 underline">
-            Login instead
+          <Link to="/login" className="text-white  pl-2 hover:underline">
+            Login
           </Link>
         </p>
       </div>
