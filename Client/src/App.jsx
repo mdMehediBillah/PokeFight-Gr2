@@ -12,7 +12,8 @@ import Gamepage from "./pages/GamePage/Gamepage";
 import DetailPage from "./pages/DetailPage/DetailPage";
 import AllPoke from "./pages/AllPoke/AllPoke";
 import ScorePage from "./pages/ScorePage/ScorePage";
-// import LoginPage from "./pages/LoginPage/LoginPage";
+// import Header from "./components/Header";
+// import Footer from "./components/Footer";
 
 function App() {
   return (

@@ -2,7 +2,7 @@ import { Router } from "express";
 const userRouter = Router();
 import { body, param } from "express-validator";
 
-// importing controlers
+// importing controllers
 import {
   getAll,
   getOne,

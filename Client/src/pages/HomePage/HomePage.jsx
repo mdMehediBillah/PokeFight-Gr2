@@ -5,6 +5,9 @@ import { motion } from "framer-motion";
 import UserProfile from "../../Components/Header/UserProfile";
 import { useEffect } from "react";
 
+import PokeCard from "../../Components/PokeCard.jsx";
+import Header from "../../Components/Header.jsx";
+
 const HomePage = () => {
   const navigate = useNavigate();
 
@@ -77,7 +80,7 @@ const HomePage = () => {
         animate="visible"
         className="text-center pt-8 text-4xl font-semibold"
       >
-        Welcome to PokeFight
+        {<Header />}
       </motion.h1>
       <motion.h2
         variants={subTitleContainerVarient}
@@ -92,14 +95,67 @@ const HomePage = () => {
         <h2 className="text-center pt-8 text-xl font-semibold">Show all</h2>{" "}
       </Link>
 
-      <div className="flex items-center justify-center gap-4 w-72 m-auto mt-10 bg-cyan-50">
-        <Link to="/allpokes/:id">
-          <p>Details</p>
-        </Link>
-
-        <Link to="/gameplay">
-          <p>Select to PokeFight</p>
-        </Link>
+      <div className="justify-center grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 grid-4 mx-20 mt-8 gap-0">
+        <div className="w-full">
+          <PokeCard />
+        </div>
+        <div className="w-full">
+          <PokeCard />
+        </div>
+        <div className="w-full">
+          <PokeCard />
+        </div>
+        <div className="w-full">
+          <PokeCard />
+        </div>
+        <div className="w-full">
+          <PokeCard />
+        </div>
+        <div className="w-full">
+          <PokeCard />
+        </div>
+        <div className="w-full">
+          <PokeCard />
+        </div>
+        <div className="w-full">
+          <PokeCard />
+        </div>
+        <div className="w-full">
+          <PokeCard />
+        </div>
+        <div className="w-full">
+          <PokeCard />
+        </div>
+        <div className="w-full">
+          <PokeCard />
+        </div>
+        <div className="w-full">
+          <PokeCard />
+        </div>
+        <div className="w-full">
+          <PokeCard />
+        </div>
+        <div className="w-full">
+          <PokeCard />
+        </div>
+        <div className="w-full">
+          <PokeCard />
+        </div>
+        <div className="w-full">
+          <PokeCard />
+        </div>
+        <div className="w-full">
+          <PokeCard />
+        </div>
+        <div className="w-full">
+          <PokeCard />
+        </div>
+        <div className="w-full">
+          <PokeCard />
+        </div>
+        <div className="w-full">
+          <PokeCard />
+        </div>
       </div>
     </motion.div>
   );
