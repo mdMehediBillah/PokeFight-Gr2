@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 
-import userRouter from "./Routes/pokeRoutes/index.js";
+import pokeRouter from "./Routes/pokeRoutes/index.js";
 
 const app = express();
 dotenv.config();
@@ -12,12 +12,13 @@ app.use(cors({ origin: "*" }));
 app.use(express.json());
 
 // routes
-app.use("/api/v1/users", userRouter);
+app.use("/pokemon", pokeRouter);
 
 // testing routes
 app.get("/", (req, res) => {
-  res.send("Hello World");
+  res.send("Hello Pokemon fans");
 });
+
 app.get("/*", (req, res) => {
   res.send("Wrong url");
 });

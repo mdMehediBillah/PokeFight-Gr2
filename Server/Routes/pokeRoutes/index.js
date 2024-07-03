@@ -1,19 +1,15 @@
 import { Router } from "express";
-const userRouter = Router();
+const pokeRouter = Router();
 
-// importing controlers
+// importing controllers
 import {
   getAll,
   getOne,
-  createOne,
-  updateOne,
-  deletOne,
+  getOneDetail,
 } from "../../Controlers/pokeControlers/index.js";
 
-userRouter.get("/", getAll);
-userRouter.post("/", createOne);
-userRouter.get("/:id", getOne);
-userRouter.put("/:id", updateOne);
-userRouter.delete("/:id", deletOne);
+pokeRouter.get("/", getAll);
+pokeRouter.get("/:id", getOne);
+pokeRouter.get("/:id/:info", getOneDetail);
 
-export default userRouter;
+export default pokeRouter;

@@ -11,7 +11,7 @@ const AllPoke = () => {
         backgroundImage: `url(${imgUrl})`,
       }}
     >
-      <h1 className="text-center pt-8 text-4xl font-semibold">All Pokemones</h1>
+      <h1 className="text-center pt-8 text-4xl font-semibold">All Pokemon</h1>
     </div>
   );
 };
