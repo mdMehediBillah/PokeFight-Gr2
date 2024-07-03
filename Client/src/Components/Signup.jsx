@@ -1,5 +1,6 @@
 import backgroundImage from "../assets/signUpBg.jpg";
 import { Link, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 import { useState } from "react";
 import { toast } from "react-toastify";
@@ -49,6 +50,7 @@ const Signup = () => {
 
         newProduct
       );
+      console.log(data);
       toast.success("SignUp successfully!");
       handleReset();
       navigate("/login");
@@ -64,7 +66,10 @@ const Signup = () => {
         backgroundImage: `url(${backgroundImage})`,
       }}
     >
-      <div
+      <motion.div
+        initial={{ opacity: 0.8, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.2 }}
         className="text-white p-8 rounded shadow-md w-full max-w-md my-8"
         style={{
           background: "rgba(10,80,100,0.6)",
@@ -129,12 +134,15 @@ const Signup = () => {
             />
           </div>
 
-          <button
+          <motion.button
+            initialValue={{ scale: 0.9 }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.9 }}
             type="submit"
             className="w-full bg-yellow-300 text-black p-2 rounded mt-4 font-bold hover:bg-orange-400"
           >
             Submit
-          </button>
+          </motion.button>
         </form>
         <p className="text-center text-white mt-4 text-sm">
           Already have an account?{" "}
@@ -142,7 +150,7 @@ const Signup = () => {
             Login
           </Link>
         </p>
-      </div>
+      </motion.div>
     </div>
   );
 };

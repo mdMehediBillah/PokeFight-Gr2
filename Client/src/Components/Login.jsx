@@ -4,6 +4,7 @@ import backgroundImage from "../assets/signUpBg.jpg";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { URL } from "../utils/myLocalURL.js";
+import { motion } from "framer-motion";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -23,13 +24,10 @@ const Login = () => {
         email,
         password,
       };
-      const { data } = await axios.post(
-        `${URL}/login`,
-
-        newUser
-      );
-
+      const { data } = await axios.post(`${URL}/login`, newUser);
+      console.log(data);
       toast.success("Login successfully!");
+      localStorage.setItem("token", data.token);
       handleReset();
       navigate("/home");
     } catch (error) {
@@ -38,13 +36,16 @@ const Login = () => {
   };
 
   return (
-    <div
+    <motion.div
       className="min-h-screen bg-cover bg-center flex items-center justify-center"
       style={{
         backgroundImage: `url(${backgroundImage})`,
       }}
     >
-      <div
+      <motion.div
+        initial={{ opacity: 0.8, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.2 }}
         className="text-white p-8 rounded shadow-md w-full max-w-md "
         style={{
           background: "rgba(10,80,100,0.6)",
@@ -79,12 +80,15 @@ const Login = () => {
               className="mt-1 p-2 w-full border rounded outline-none text-black"
             />
           </div>
-          <button
+          <motion.button
+            initialValue={{ scale: 0.9 }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.9 }}
             type="submit"
             className="w-full bg-yellow-300 text-black p-2 rounded mt-4 font-bold hover:bg-orange-400"
           >
             Login
-          </button>
+          </motion.button>
         </form>
         <p className="text-center text-white mt-4 text-sm">
           Don't have an account?{" "}
@@ -92,8 +96,8 @@ const Login = () => {
             Sign up
           </Link>
         </p>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

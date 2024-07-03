@@ -10,12 +10,15 @@ import userRouter from "./Routes/pokeRoutes/index.js";
 
 // import Model from pokeUserModel
 import pokeUserModel from "./models/pokeUserModel.js";
+// import loggingRoutes from "./Routes/loginRoutes/index.js";
 
 // create application from express
 const app = express();
 app.use(cors({ origin: "*" }));
 app.use(express.json());
 dotenv.config();
+
+// database connection
 connectDB();
 
 // Session
