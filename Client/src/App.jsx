@@ -1,5 +1,5 @@
-import Signup from "./Components/Signup";
-import Login from "./Components/Login";
+import Signup from "./components/Signup";
+import Login from "./components/Login";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -12,7 +12,9 @@ import Gamepage from "./pages/GamePage/Gamepage";
 import DetailPage from "./pages/DetailPage/DetailPage";
 import AllPoke from "./pages/AllPoke/AllPoke";
 import ScorePage from "./pages/ScorePage/ScorePage";
-// import LoginPage from "./pages/LoginPage/LoginPage";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 function App() {
   return (
