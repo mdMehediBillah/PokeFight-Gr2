@@ -12,9 +12,12 @@ import {
 } from "../../Controlers/pokeControlers/index.js";
 
 // import middleware
-import { postErrorValidator } from "../../Middleware/PokeUser/index.js";
+import {
+  postErrorValidator,
+  isAuthenticated,
+} from "../../Middleware/PokeUser/index.js";
 
-userRouter.get("/", getAll);
+userRouter.get("/", isAuthenticated, getAll);
 userRouter.post("/", postErrorValidator, createOne);
 userRouter.get(
   "/:id",
