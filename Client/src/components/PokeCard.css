@@ -4,7 +4,7 @@
     linear-gradient(to right, darkblue, darkorchid) border-box;
   border: 10px solid transparent;
   border-radius: 20px;
-  box-shadow: 2px 2px 2px #4336ff00;
+  box-shadow: 0px 0px 10px #4336ffa2;
   min-width: 350px;
   max-width: 350px;
   height: 430px;
@@ -16,7 +16,7 @@
   opacity: 1;
   &:hover {
     scale: 0.908;
-    box-shadow: 2px 2px 70px #ffffff;
+    /* box-shadow: 2px 2px 70px #ffffff; */
     transition: ease-in-out 0.3s;
 
     .pokecard-image {
@@ -54,6 +54,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: #000000;
 }
 
 .pokecard-hp {
@@ -76,7 +77,6 @@
 .pokecard-background_img {
   position: absolute;
   z-index: 0;
-  /* overflow: visible; */
   height: auto;
   width: 100%;
   object-fit: cover;
@@ -137,7 +137,7 @@
   padding-left: 15px;
   background-color: #0000005b;
   border-radius: 5px;
-  /* box-shadow: #000000b4 0px 0px 5px; */
+  box-shadow: #000000d0 0px 0px 5px;
 }
 
 .pokecard .pokecard-attack,
@@ -152,6 +152,7 @@
   display: flex;
   justify-content: space-between;
   padding: 5px;
+  padding-inline: 20px;
   font-size: 1.2em;
   font-weight: 800;
 }

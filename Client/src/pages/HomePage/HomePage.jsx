@@ -45,6 +45,42 @@ const HomePage = () => {
         <div className="w-full">
           <PokeCard />
         </div>
+        <div className="w-full">
+          <PokeCard />
+        </div>
+        <div className="w-full">
+          <PokeCard />
+        </div>
+        <div className="w-full">
+          <PokeCard />
+        </div>
+        <div className="w-full">
+          <PokeCard />
+        </div>
+        <div className="w-full">
+          <PokeCard />
+        </div>
+        <div className="w-full">
+          <PokeCard />
+        </div>
+        <div className="w-full">
+          <PokeCard />
+        </div>
+        <div className="w-full">
+          <PokeCard />
+        </div>
+        <div className="w-full">
+          <PokeCard />
+        </div>
+        <div className="w-full">
+          <PokeCard />
+        </div>
+        <div className="w-full">
+          <PokeCard />
+        </div>
+        <div className="w-full">
+          <PokeCard />
+        </div>
       </div>
     </div>
   );

@@ -1,9 +1,26 @@
 import "./DetailPage.css";
 import imgUrl from "../../images/homeBg.jpg";
 import electric from "../../assets/images/pokecard/electric.svg";
+// import bug from "../../assets/images/pokecard/bug.svg";
+// import dark from "../../assets/images/pokecard/dark.svg";
+// import dragon from "../../assets/images/pokecard/dragon.svg";
+// import fairy from "../../assets/images/pokecard/fairy.svg";
+// import fighting from "../../assets/images/pokecard/fighting.svg";
+// import fire from "../../assets/images/pokecard/fire.svg";
+// import flying from "../../assets/images/pokecard/flying.svg";
+// import ghost from "../../assets/images/pokecard/ghost.svg";
+// import grass from "../../assets/images/pokecard/grass.svg";
+// import ground from "../../assets/images/pokecard/ground.svg";
+// import ice from "../../assets/images/pokecard/ice.svg";
+// import normal from "../../assets/images/pokecard/normal.svg";
+// import poison from "../../assets/images/pokecard/poison.svg";
+// import psychic from "../../assets/images/pokecard/psychic.svg";
+// import rock from "../../assets/images/pokecard/rock.svg";
+// import steel from "../../assets/images/pokecard/steel.svg";
+// import water from "../../assets/images/pokecard/water.svg";
+
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import "./DetailPage.css";
 
@@ -85,7 +102,7 @@ const DetailPage = () => {
           <p className="detail-type">
             Type: {types.map((type) => type.type.name).join(", ")}
           </p>
-          <p>Height:{height / 10} m</p>
+          <p>Height: {height / 10} m</p>
           <p>Weight: {weight / 10} kg</p>
           <p>
             Abilities:
