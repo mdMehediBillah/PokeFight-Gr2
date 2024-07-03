@@ -1,5 +1,5 @@
-import Signup from "./Components/Signup";
-import Login from "./Components/Login";
+import Signup from "./components/Signup";
+import Login from "./components/Login";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
