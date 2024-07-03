@@ -1,8 +1,8 @@
 import "./HomePage.css";
 import imgUrl from "../../images/homeBg.jpg";
 import { Link } from "react-router-dom";
-import PokeCard from "../../components/PokeCard.jsx";
-import Header from "../../components/Header.jsx";
+import PokeCard from "../../Components/PokeCard.jsx";
+import Header from "../../Components/Header.jsx";
 
 const HomePage = () => {
   return (

@@ -6,7 +6,9 @@ import { body, param } from "express-validator";
 import {
   getAll,
   getOne,
-  getOneDetail,
+  createOne,
+  updateOne,
+  deletOne,
 } from "../../Controlers/pokeControlers/index.js";
 
 // import middleware
