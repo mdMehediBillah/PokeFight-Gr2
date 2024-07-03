@@ -25,9 +25,11 @@ const Login = () => {
         password,
       };
       const { data } = await axios.post(`${URL}/login`, newUser);
-      console.log(data);
+      console.log(data.token);
+      console.log(data.email);
       toast.success("Login successfully!");
       localStorage.setItem("token", data.token);
+      localStorage.setItem("email", data.email);
       handleReset();
       navigate("/home");
     } catch (error) {
@@ -91,7 +93,7 @@ const Login = () => {
           </motion.button>
         </form>
         <p className="text-center text-white mt-4 text-sm">
-          Don't have an account?{" "}
+          Do not have an account?{" "}
           <Link to="/signup" className="text-white  pl-2 hover:underline">
             Sign up
           </Link>

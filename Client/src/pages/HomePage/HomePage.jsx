@@ -1,10 +1,16 @@
 import "./HomePage.css";
 import imgUrl from "../../images/homeBg.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import UserProfile from "../../Components/Header/UserProfile";
+import { useEffect } from "react";
 
 const HomePage = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!localStorage.getItem("token")) navigate("/login");
+  }, []);
   const homeContainerVarient = {
     hidde: {
       opacity: 0.6,
