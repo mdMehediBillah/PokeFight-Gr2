@@ -1,4 +1,5 @@
 import { FaUserCircle } from "react-icons/fa";
+import { GrLogout } from "react-icons/gr";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { URL } from "../../utils/myLocalURL.js";
@@ -17,6 +18,7 @@ const UserProfile = () => {
       console.log(data);
       localStorage.removeItem("token");
       localStorage.removeItem("email");
+      localStorage.removeItem("userName");
       toast.success("Logout successfully!");
       navigate("/login");
     } catch (error) {
@@ -25,11 +27,28 @@ const UserProfile = () => {
   };
   return (
     <>
-      <div className="flex items-center gap-1  px-2 py-1  rounded mx-auto text-black ">
-        <FaUserCircle />
-        <span>{userEmail}</span>
+      <div className="dropdown">
+        <div
+          tabIndex={0}
+          role="button"
+          className="btn bg-green-600 text-white m-1"
+        >
+          <FaUserCircle />
+          {userEmail}
+        </div>
+        <ul
+          tabIndex={0}
+          className="dropdown-content menu bg-orange-300 z-[1] w-52 p-1 shadow text-black rounded font-semibold"
+        >
+          <li onClick={handleLogout}>
+            <span>
+              {" "}
+              <GrLogout />
+              Logout
+            </span>
+          </li>
+        </ul>
       </div>
-      <button onClick={handleLogout}>Logout</button>
     </>
   );
 };

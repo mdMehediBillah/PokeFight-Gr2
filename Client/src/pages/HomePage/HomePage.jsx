@@ -10,6 +10,7 @@ import Header from "../../Components/Header.jsx";
 
 const HomePage = () => {
   const navigate = useNavigate();
+  const userName = localStorage.getItem("userName");
 
   useEffect(() => {
     if (!localStorage.getItem("token")) navigate("/login");
@@ -74,6 +75,8 @@ const HomePage = () => {
         backgroundImage: `url(${imgUrl})`,
       }}
     >
+      {" "}
+      <h3 className="text-black py-2">{userName}</h3>
       <motion.h1
         variants={titleContainerVarient}
         initial="hidde"
@@ -82,56 +85,19 @@ const HomePage = () => {
       >
         {<Header />}
       </motion.h1>
+      <UserProfile />
       <motion.h2
         variants={subTitleContainerVarient}
         initial="hidde"
         animate="visible"
-        className="text-center pt-8 text-2xl font-semibold"
+        className="text-center pt-8 text-2xl font-semibold text-black"
       >
         The best place to fight with Pokemon
       </motion.h2>
-      <UserProfile />
       <Link to="/allPokes">
         <h2 className="text-center pt-8 text-xl font-semibold">Show all</h2>{" "}
       </Link>
-
       <div className="justify-center grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 grid-4 mx-20 mt-8 gap-0">
-        <div className="w-full">
-          <PokeCard />
-        </div>
-        <div className="w-full">
-          <PokeCard />
-        </div>
-        <div className="w-full">
-          <PokeCard />
-        </div>
-        <div className="w-full">
-          <PokeCard />
-        </div>
-        <div className="w-full">
-          <PokeCard />
-        </div>
-        <div className="w-full">
-          <PokeCard />
-        </div>
-        <div className="w-full">
-          <PokeCard />
-        </div>
-        <div className="w-full">
-          <PokeCard />
-        </div>
-        <div className="w-full">
-          <PokeCard />
-        </div>
-        <div className="w-full">
-          <PokeCard />
-        </div>
-        <div className="w-full">
-          <PokeCard />
-        </div>
-        <div className="w-full">
-          <PokeCard />
-        </div>
         <div className="w-full">
           <PokeCard />
         </div>

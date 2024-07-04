@@ -27,9 +27,11 @@ const Login = () => {
       const { data } = await axios.post(`${URL}/login`, newUser);
       console.log(data.token);
       console.log(data.email);
+      console.log(data.userName);
       toast.success("Login successfully!");
       localStorage.setItem("token", data.token);
       localStorage.setItem("email", data.email);
+      localStorage.setItem("userName", data.userName);
       handleReset();
       navigate("/home");
     } catch (error) {
@@ -66,7 +68,7 @@ const Login = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email"
-              className="mt-1 p-2 w-full border rounded outline-none text-black"
+              className="mt-1 p-2 w-full border rounded outline-none text-black bg-cyan-50"
             />
           </div>
           <div className="mb-4">
@@ -79,7 +81,7 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
-              className="mt-1 p-2 w-full border rounded outline-none text-black"
+              className="mt-1 p-2 w-full border rounded outline-none text-black bg-cyan-50"
             />
           </div>
           <motion.button

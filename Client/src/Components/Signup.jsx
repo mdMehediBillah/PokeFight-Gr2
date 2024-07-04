@@ -90,7 +90,7 @@ const Signup = () => {
               onChange={handleChange}
               value={first_name}
               placeholder="First Name"
-              className="mt-1 p-2 w-full border rounded outline-none text-black"
+              className="mt-1 p-2 w-full border rounded outline-none text-black bg-cyan-50"
             />
           </div>
 
@@ -104,7 +104,7 @@ const Signup = () => {
               onChange={handleChange}
               value={last_name}
               placeholder="Last Name"
-              className="mt-1 p-2 w-full border rounded outline-none text-black"
+              className="mt-1 p-2 w-full border rounded outline-none text-black bg-cyan-50"
             />
           </div>
 
@@ -116,7 +116,7 @@ const Signup = () => {
               onChange={handleChange}
               value={email}
               placeholder="Email"
-              className="mt-1 p-2 w-full border rounded outline-none text-black"
+              className="mt-1 p-2 w-full border rounded outline-none text-black bg-cyan-50"
             />
           </div>
 
@@ -130,7 +130,7 @@ const Signup = () => {
               onChange={handleChange}
               value={password}
               placeholder="Password"
-              className="mt-1 p-2 w-full border rounded outline-none text-black"
+              className="mt-1 p-2 w-full border rounded outline-none text-black bg-cyan-50"
             />
           </div>
 
