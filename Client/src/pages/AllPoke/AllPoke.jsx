@@ -2,16 +2,17 @@ import "./AllPoke.css";
 import { useState, useEffect } from "react";
 import "../HomePage/HomePage.css";
 import imgUrl from "../../images/homeBg.jpg";
+import pokeFight from "../../assets/pokeFight.png";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import axios from "axios";
+// import axios from "axios";
 // import UserProfile from "../../Components/Header/UserProfile";
 
 // import PokeCard from "../../components/PokeCard.jsx";
 import Header from "../../Components/Header.jsx";
 
 const AllPoke = () => {
-  const [pokemonData, setPokemonData] = useState(null);
+  // const [pokemonData, setPokemonData] = useState(null);
   const navigate = useNavigate();
   const [searched, setSearched] = useState(false);
   // const userName = localStorage.getItem("userName");
@@ -123,6 +124,15 @@ const AllPoke = () => {
         className="text-center pt-8 text-4xl font-semibold"
       >
         {<Header />}
+      </motion.h1>
+      style={{ backgroundImage: `url(${imgUrl})` }}>
+      <motion.h1
+        variants={titleContainerVarient}
+        initial="hidden"
+        animate="visible"
+        className="text-center pt-8 text-4xl font-semibold"
+      >
+        <img src={pokeFight} alt="pokefight icon" className="w-72" />{" "}
       </motion.h1>
       {/* <UserProfile /> */}
       {/* <div className="pokecard">
