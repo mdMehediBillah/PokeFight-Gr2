@@ -196,14 +196,14 @@
   margin-top: 45px;
 }
 
-.detail-fight,
+.detail-fgt,
 .detail-back {
   cursor: pointer;
   color: #ffffff;
   font-size: 1.2em;
   font-weight: 800;
   border: 3px solid #ffffff;
-  border-radius: 5px;
+  border-radius: 10px;
   padding-block: 5px;
   padding-inline: 20px;
   box-shadow: 0px 0px 2px #000000d2;
@@ -223,7 +223,7 @@
   padding-left: 45px;
   padding-right: 10px;
 }
-.detail-fight {
+.detail-fgt {
   background: #c50000;
   background-image: url("../../assets/fight_icon.svg");
   background-size: 30px;

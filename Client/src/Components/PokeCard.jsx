@@ -101,7 +101,7 @@ const PokeCard = () => {
         <p className="pokecard-type text-black font-bold">
           Type: {types.map((type) => type.type.name).join(", ")}
         </p>
-        <p className=" text-black line-clamp-2 py-6 pl-4 text-sm">
+        <p className=" text-black line-clamp-2 px-4 py-6 text-sm">
           {description}
         </p>
         <div className="pokecard-buttons">
@@ -109,7 +109,7 @@ const PokeCard = () => {
             <p className="pokecard-details">DETAILS</p>
           </Link>
           <Link to="/gameplay" state={{ selectedPokemon: pokemonData }}>
-            <p className="pokecard-fight">FIGHT</p>
+            <p className="pokecard-fgt">FIGHT</p>
           </Link>
         </div>
       </div>

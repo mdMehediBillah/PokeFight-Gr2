@@ -116,9 +116,9 @@ const HomePage = () => {
               variants={showAllVarient}
               initial="hidde"
               animate="visible"
-              className="font-semibold text-black hover:underline "
+              className="home-pokedex-btn"
             >
-              Show all
+              POKÉDEX
             </motion.h2>{" "}
           </Link>
         </div>

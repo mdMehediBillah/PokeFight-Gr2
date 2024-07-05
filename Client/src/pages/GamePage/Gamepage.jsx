@@ -1,10 +1,10 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-
 import imgUrl from "../../images/gamePlayBg.jpg";
-
+import electric from "../../assets/images/pokecard/electric.svg";
 import { useEffect, useState } from "react";
 //import { useLocation } from "react-router-dom";
 import axios from "axios";
+import { motion } from "framer-motion";
 
 const Gamepage = () => {
   const location = useLocation();
@@ -120,45 +120,118 @@ const Gamepage = () => {
 
       <div className="fight-container flex flex-row items-center pb-8 h-full">
         {" "}
-        <div className="pokecard border rounded-lg p-4 mx-4 mb-8 text-center w-72 h-90">
-          {" "}
-          <h2 className="pokecard-title">{selectedPokemon.name}</h2>
-          <img
-            className="pokecard-image"
-            src={selectedPokemon.image}
-            alt={selectedPokemon.name}
-          />
-          <p className="pokecard-stats">HP: {selectedPokemon.stats.hp}</p>
-          <p className="pokecard-stats">
-            Attack: {selectedPokemon.stats.attack}
-          </p>
-          <p className="pokecard-stats">
-            Defense: {selectedPokemon.stats.defense}
-          </p>
-          <p className="pokecard-type">
-            Type:{" "}
-            {selectedPokemon.types.map((type) => type.type.name).join(", ")}
-          </p>
-          <p className="pokecard-description">{selectedPokemon.description}</p>
-        </div>
+        <motion.div
+          whileHover={{ scale: 1.04 }}
+          transition={{ type: "spring", duration: 0.2, bounce: true }}
+          className="pokecard"
+        >
+          <div className="pokecard-header">
+            {" "}
+            <h2 className="pokecard-title">{selectedPokemon.name}</h2>
+            <p className="pokecard-hp text-black font-semibold">
+              HP: {selectedPokemon.stats.hp}
+            </p>
+          </div>
+          <div className="pokecard-img-container">
+            <div className="pokecard-background">
+              <img
+                src={electric}
+                alt="Pokecard background"
+                className="pokecard-background_img"
+              />
+            </div>
+            <img
+              className="pokecard-image"
+              src={selectedPokemon.image}
+              alt={selectedPokemon.name}
+            />
+            <p className="pokecard-order">{selectedPokemon.order}</p>
+            <div className="pokecard-stats">
+              <span className="pokecard-attack">
+                Attack: {selectedPokemon.stats.attack}
+              </span>
+              <span className="pokecard-defense">
+                Defense: {selectedPokemon.stats.defense}
+              </span>
+            </div>
+          </div>
+
+          <div className="pokecard-body">
+            <p className="pokecard-type text-black font-bold">
+              Type:{" "}
+              {selectedPokemon.types.map((type) => type.type.name).join(", ")}
+            </p>
+            <p className=" text-black line-clamp-2 px-4 py-6 text-sm">
+              {selectedPokemon.description}
+            </p>
+            <div className="pokecard-buttons">
+              <Link to={`/allpokes`}>
+                <p className="pokecard-details">BACK</p>
+              </Link>
+              <Link
+                to=""
+                state={{ selectedPokemon: selectedPokemon.pokemonData }}
+              >
+                <p className="pokecard-fgt">ATTACK</p>
+              </Link>
+            </div>
+          </div>
+        </motion.div>
         <div className="vs">VS</div>
-        <div className="pokecard">
-          <h2 className="pokecard-title">{randomPokemon.name}</h2>
-          <img
-            className="pokecard-image"
-            src={randomPokemon.image}
-            alt={randomPokemon.name}
-          />
-          <p className="pokecard-stats">HP: {randomPokemon.stats.hp}</p>
-          <p className="pokecard-stats">Attack: {randomPokemon.stats.attack}</p>
-          <p className="pokecard-stats">
-            Defense: {randomPokemon.stats.defense}
-          </p>
-          <p className="pokecard-type">
-            Type: {randomPokemon.types.map((type) => type.type.name).join(", ")}
-          </p>
-          <p className="pokecard-description">{randomPokemon.description}</p>
-        </div>
+        <motion.div
+          whileHover={{ scale: 1.04 }}
+          transition={{ type: "spring", duration: 0.2, bounce: true }}
+          className="pokecard"
+        >
+          <div className="pokecard-header">
+            {" "}
+            <h2 className="pokecard-title">{randomPokemon.name}</h2>
+            <p className="pokecard-hp text-black font-semibold">
+              HP: {randomPokemon.stats.hp}
+            </p>
+          </div>
+          <div className="pokecard-img-container">
+            <div className="pokecard-background">
+              <img
+                src={electric}
+                alt="Pokecard background"
+                className="pokecard-background_img"
+              />
+            </div>
+            <img
+              className="pokecard-image"
+              src={randomPokemon.image}
+              alt={randomPokemon.name}
+            />
+            <p className="pokecard-order">{randomPokemon.order}</p>
+            <div className="pokecard-stats">
+              <span className="pokecard-attack">
+                Attack: {randomPokemon.stats.attack}
+              </span>
+              <span className="pokecard-defense">
+                Defense: {randomPokemon.stats.defense}
+              </span>
+            </div>
+          </div>
+
+          <div className="pokecard-body">
+            <p className="pokecard-type text-black font-bold">
+              Type:{" "}
+              {randomPokemon.types.map((type) => type.type.name).join(", ")}
+            </p>
+            <p className=" text-black line-clamp-2 px-4 py-6 text-sm">
+              {randomPokemon.description}
+            </p>
+            <div className="pokecard-buttons">
+              <Link to={`/allpokes`}>
+                <p className="pokecard-details">BACK</p>
+              </Link>
+              <Link to="" state={{ randomPokemon: randomPokemon.pokemonData }}>
+                <p className="pokecard-fgt">ATTACK</p>
+              </Link>
+            </div>
+          </div>
+        </motion.div>
         <div className="result">
           <h2>{winner ? `${winner} wins!` : "It's a tie!"}</h2>
         </div>
