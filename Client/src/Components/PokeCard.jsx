@@ -108,7 +108,7 @@ const PokeCard = () => {
           <Link to={`/allpokes/${pokemonData.id}`}>
             <p className="pokecard-details">DETAILS</p>
           </Link>
-          <Link to="/gameplay">
+          <Link to="/gameplay" state={{ selectedPokemon: pokemonData }}>
             <p className="pokecard-fight">FIGHT</p>
           </Link>
         </div>
