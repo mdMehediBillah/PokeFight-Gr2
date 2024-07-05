@@ -141,7 +141,7 @@
   font-weight: 800;
 }
 
-.pokecard-fight,
+.pokecard-fgt,
 .pokecard-details {
   cursor: pointer;
   color: #ffffff;
@@ -157,7 +157,7 @@
   }
 }
 
-.pokecard-fight {
+.pokecard-fgt {
   background: #b13f3f;
   background-image: url("../assets/fight_icon.svg");
   background-size: 30px;

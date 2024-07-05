@@ -109,7 +109,7 @@ const PokeCard = () => {
             <p className="pokecard-details">DETAILS</p>
           </Link>
           <Link to="/gameplay">
-            <p className="pokecard-fight">FIGHT</p>
+            <p className="pokecard-fgt">FIGHT</p>
           </Link>
         </div>
       </div>
