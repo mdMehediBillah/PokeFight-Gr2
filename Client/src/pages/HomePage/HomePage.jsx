@@ -2,7 +2,7 @@ import "./HomePage.css";
 import imgUrl from "../../images/homeBg.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import UserProfile from "../../Components/Header/UserProfile";
+import UserProfile from "../../Components/Header/UserProfile.jsx";
 import { useEffect } from "react";
 
 import PokeCard from "../../Components/PokeCard.jsx";
@@ -94,9 +94,11 @@ const HomePage = () => {
       >
         The best place to fight with Pokemon
       </motion.h2>
-      <Link to="/allPokes">
-        <h2 className="text-center pt-8 text-xl font-semibold">Show all</h2>{" "}
-      </Link>
+      <div className="home-button">
+        <Link to="/allpokes">
+          <p className="home-pokedex-btn">POKÉDEX</p>
+        </Link>
+      </div>
       <div className="justify-center grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 grid-4 mx-20 mt-8 gap-0">
         <div className="w-full">
           <PokeCard />

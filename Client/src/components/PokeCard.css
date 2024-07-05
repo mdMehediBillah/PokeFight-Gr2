@@ -61,6 +61,7 @@
   font-size: 1em;
   font-weight: 400;
   align-self: center;
+  color: #000000;
 }
 
 .pokecard-img-container {
@@ -112,6 +113,7 @@
   font-size: 1em;
   font-weight: 500;
   text-transform: uppercase;
+  color: #000000;
 }
 
 .pokecard-description {
@@ -165,16 +167,30 @@
   border-radius: 5px;
   padding-block: 2px;
   padding-inline: 15px;
-  box-shadow: 0px 0px 5px #000000d2;
+  box-shadow: 0px 0px 3px #000000d2;
   &:hover {
-    scale: 1.1;
+    scale: 1.05;
     transition: ease-in-out 0.2s;
+    box-shadow: 0px 0px 5px #000000d2;
   }
 }
 
-.pokecard-details {
-  background: #056c8b;
-}
 .pokecard-fight {
-  background: #db4040;
+  background: #b13f3f;
+  background-image: url("../assets/fight_icon.svg");
+  background-size: 30px;
+  background-repeat: no-repeat;
+  background-position: 5px;
+  padding-left: 45px;
+  padding-right: 10px;
+}
+
+.pokecard-details {
+  background: #356f81;
+  background-image: url("../assets/detail_icon.svg");
+  background-size: 30px;
+  background-repeat: no-repeat;
+  background-position: 8px;
+  padding-left: 45px;
+  padding-right: 10px;
 }
