@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 import UserProfile from "../../Components/Header/UserProfile";
 import { useEffect } from "react";
 
-import PokeCard from "../../Components/PokeCard.jsx";
-import Header from "../../Components/Header.jsx";
+import PokeCard from "../../components/PokeCard.jsx";
+import Header from "../../components/Header.jsx";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -65,21 +65,13 @@ const HomePage = () => {
   };
   return (
     <motion.div
-      variants={homeContainerVarient}
-      initial="hidde"
-      animate="visible"
-      exit="exit"
-      className=" homeBg min-h-screen bg-cover bg-center bg-no-repeat w-[100%]
-      "
-      style={{
-        backgroundImage: `url(${imgUrl})`,
-      }}
-    >
+      variants={homeContainerVarient} initial="hidden" animate="visible" exit="exit"
+      className=" homeBg min-h-screen bg-cover bg-center bg-no-repeat w-[100%]"
+      style={{ backgroundImage: `url(${imgUrl})`,}}>
       {" "}
       <h3 className="text-black py-2">{userName}</h3>
       <motion.h1
-        variants={titleContainerVarient}
-        initial="hidde"
+        variants={titleContainerVarient} initial="hidde"
         animate="visible"
         className="text-center pt-8 text-4xl font-semibold"
       >
