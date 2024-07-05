@@ -4,14 +4,14 @@ import "../HomePage/HomePage.css";
 import imgUrl from "../../images/homeBg.jpg";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import axios from "axios";
+// import axios from "axios";
 // import UserProfile from "../../Components/Header/UserProfile";
 
 // import PokeCard from "../../components/PokeCard.jsx";
 import Header from "../../Components/Header.jsx";
 
 const AllPoke = () => {
-  const [pokemonData, setPokemonData] = useState(null);
+  // const [pokemonData, setPokemonData] = useState(null);
   const navigate = useNavigate();
   const [searched, setSearched] = useState(false);
   // const userName = localStorage.getItem("userName");
