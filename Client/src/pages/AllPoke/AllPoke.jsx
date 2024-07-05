@@ -2,17 +2,17 @@ import "./AllPoke.css";
 import { useState, useEffect } from "react";
 import "../HomePage/HomePage.css";
 import imgUrl from "../../images/homeBg.jpg";
+import pokeFight from "../../assets/pokeFight.png";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import axios from "axios";
+// import axios from "axios";
 // import UserProfile from "../../Components/Header/UserProfile";
 
 // import PokeCard from "../../components/PokeCard.jsx";
 import Header from "../../Components/Header.jsx";
 
-
 const AllPoke = () => {
-  const [pokemonData, setPokemonData] = useState(null);
+  // const [pokemonData, setPokemonData] = useState(null);
   const navigate = useNavigate();
   const [searched, setSearched] = useState(false);
   // const userName = localStorage.getItem("userName");
@@ -21,7 +21,7 @@ const AllPoke = () => {
     if (!localStorage.getItem("token")) navigate("/login");
   }, []);
   const homeContainerVarient = {
-    hidden: {opacity: 0.6,},
+    hidden: { opacity: 0.6 },
     visible: {
       opacity: 1,
       transition: {
@@ -51,12 +51,10 @@ const AllPoke = () => {
     },
   };
 
-
   const [searchInput, setSearchInput] = useState("");
   const [searchResult, setSearchResult] = useState(null);
   const [description, setDescription] = useState("non defined");
   const [details, setDetails] = useState([]);
-      
 
   const handleSearch = async () => {
     if (!searchInput) return;
@@ -70,19 +68,15 @@ const AllPoke = () => {
     console.log("description : ", description);
     setSearched(true);
 
-
     if (response.ok && description.ok) {
       const data = await response.json();
       const des = await description.json();
-      
+
       setSearchResult(data);
       setDescription(des);
-      
-
-
     } else {
       setSearchResult(null);
-      console.log("y")
+      console.log("y");
     }
   };
 
@@ -94,17 +88,17 @@ const AllPoke = () => {
           "https://pokeapi.co/api/v2/pokemon?limit=30"
         );
         const data = await response.json();
-  
+
         // Extract the URLs from the results
         const pokemonUrls = data.results.map((pokemon) => pokemon.url);
-  
+
         // Fetch the details for each Pokémon
         const pokemonDetailsPromises = pokemonUrls.map((url) =>
           fetch(url).then((res) => res.json())
         );
         const pokemonDetails = await Promise.all(pokemonDetailsPromises);
         setDetails(pokemonDetails);
-  
+
         // Log the details
       } catch (error) {
         console.error("Error fetching Pokémon details:", error);
@@ -114,14 +108,22 @@ const AllPoke = () => {
   }, []);
 
   return (
-      <motion.div variants={homeContainerVarient} initial="hidden" animate="visible" exit="exit"
+    <motion.div
+      variants={homeContainerVarient}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
       className="main homeBg min-h-screen bg-cover bg-center bg-no-repeat w-[100%]"
-      style={{ backgroundImage: `url(${imgUrl})`,}}>
-    {" "}
-     <motion.h1
-        variants={titleContainerVarient} initial="hidden" animate="visible"
-        className="text-center pt-8 text-4xl font-semibold">
-        {<Header />}</motion.h1>
+      style={{ backgroundImage: `url(${imgUrl})` }}
+    >
+      <motion.h1
+        variants={titleContainerVarient}
+        initial="hidden"
+        animate="visible"
+        className="text-center pt-8 text-4xl font-semibold"
+      >
+        <img src={pokeFight} alt="pokefight icon" className="w-72" />{" "}
+      </motion.h1>
       {/* <UserProfile /> */}
       {/* <div className="pokecard">
       <div className="pokecard-header">
@@ -163,28 +165,31 @@ const AllPoke = () => {
     </div> */}
       <section className="mt-5">
         <div className="flex">
-        <input className="hero__glow-cta mr-5" type="text" placeholder="Enter Pokemon name" value={searchInput}
-          onChange={(e) => setSearchInput(e.target.value)}/>
-        <button className="hero__glow-cta" onClick={handleSearch}>
-          Search
-        </button>
+          <input
+            className="hero__glow-cta mr-5"
+            type="text"
+            placeholder="Enter Pokemon name"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+          />
+          <button className="hero__glow-cta" onClick={handleSearch}>
+            Search
+          </button>
         </div>
-        {searched && !searchResult && (<h2>not found</h2>)}
-          {searchResult && (
-            <div>
-             <h2>name : {searchResult.name} </h2>
-              <p>descripiton: {description.base_happiness}</p>
-              <p>Height: {searchResult.height}</p>
-              <p>Weight: {searchResult.weight}</p>
-              <img
-                src={searchResult.sprites.front_default}
-                alt={searchResult.name}
-              />
-            </div>
-          )
-          }
+        {searched && !searchResult && <h2>not found</h2>}
+        {searchResult && (
+          <div>
+            <h2>name : {searchResult.name} </h2>
+            <p>descripiton: {description.base_happiness}</p>
+            <p>Height: {searchResult.height}</p>
+            <p>Weight: {searchResult.weight}</p>
+            <img
+              src={searchResult.sprites.front_default}
+              alt={searchResult.name}
+            />
+          </div>
+        )}
       </section>
-
       <ul>
         {details.map((pokemon) => (
           <li key={pokemon.id}>

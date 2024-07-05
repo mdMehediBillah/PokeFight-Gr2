@@ -159,20 +159,20 @@
 
 .pokecard-fight {
   background: #b13f3f;
-  background-image: url("../assets/fight_icon.svg");
+  /* background-image: url("../assets/fight_icon.svg"); */
   background-size: 30px;
   background-repeat: no-repeat;
   background-position: 5px;
-  padding-left: 45px;
+  /* padding-left: 45px; */
   padding-right: 10px;
 }
 
 .pokecard-details {
   background: #356f81;
-  background-image: url("../assets/detail_icon.svg");
+  /* background-image: url("../assets/detail_icon.svg"); */
   background-size: 30px;
   background-repeat: no-repeat;
   background-position: 8px;
-  padding-left: 45px;
+  /* padding-left: 45px; */
   padding-right: 10px;
 }

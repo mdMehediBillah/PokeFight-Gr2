@@ -108,7 +108,6 @@ const HomePage = () => {
         backgroundImage: `url(${imgUrl})`,
       }}
     >
-
       <div>
         <div className="flex container justify-between mx-auto py-4">
           <UserProfile />
@@ -122,7 +121,6 @@ const HomePage = () => {
               Show all
             </motion.h2>{" "}
           </Link>
-
         </div>
         <motion.h3
           variants={userNameVarient}
