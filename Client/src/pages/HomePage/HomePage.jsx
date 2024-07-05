@@ -7,8 +7,8 @@ import { useEffect } from "react";
 import { FaFacebookF, FaInstagram, FaTiktok } from "react-icons/fa6";
 import pokeIcon from "../../assets/favicon.png";
 
-import PokeCard from "../../components/PokeCard.jsx";
-import Header from "../../components/Header.jsx";
+import PokeCard from "../../Components/PokeCard.jsx";
+import Header from "../../Components/Header.jsx";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -108,7 +108,6 @@ const HomePage = () => {
         backgroundImage: `url(${imgUrl})`,
       }}
     >
-
       <div>
         <div className="flex container justify-between mx-auto py-4">
           <UserProfile />
@@ -122,7 +121,6 @@ const HomePage = () => {
               Show all
             </motion.h2>{" "}
           </Link>
-
         </div>
         <motion.h3
           variants={userNameVarient}
