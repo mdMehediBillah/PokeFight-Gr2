@@ -2,7 +2,7 @@ import "./HomePage.css";
 import imgUrl from "../../images/homeBg.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import UserProfile from "../../Components/Header/UserProfile";
+import UserProfile from "../../Components/Header/UserProfile.jsx";
 import { useEffect } from "react";
 import { FaFacebookF, FaInstagram, FaTiktok } from "react-icons/fa6";
 import pokeIcon from "../../assets/favicon.png";
@@ -108,6 +108,7 @@ const HomePage = () => {
         backgroundImage: `url(${imgUrl})`,
       }}
     >
+
       <div>
         <div className="flex container justify-between mx-auto py-4">
           <UserProfile />
@@ -121,6 +122,7 @@ const HomePage = () => {
               Show all
             </motion.h2>{" "}
           </Link>
+
         </div>
         <motion.h3
           variants={userNameVarient}

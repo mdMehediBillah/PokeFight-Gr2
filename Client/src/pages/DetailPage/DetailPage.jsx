@@ -34,9 +34,40 @@ const DetailPage = () => {
         const response = await axios.get(
           `https://pokeapi.co/api/v2/pokemon/${id}`
         );
-        const pokemonData = response.data;
+        const pokemonDetails = response.data;
 
-        setPokemonDetails(pokemonData);
+        const speciesResponse = await axios.get(
+          `https://pokeapi.co/api/v2/pokemon-species/${id}`
+        );
+        const speciesData = speciesResponse.data;
+        const description = speciesData.flavor_text_entries.find(
+          (entry) => entry.language.name === "en"
+        ).flavor_text;
+
+        const formattedPokemon = {
+          id: pokemonDetails.id,
+          name: pokemonDetails.name,
+          order: pokemonDetails.order,
+          stats: {
+            hp: pokemonDetails.stats.find((stat) => stat.stat.name === "hp")
+              .base_stat,
+            attack: pokemonDetails.stats.find(
+              (stat) => stat.stat.name === "attack"
+            ).base_stat,
+            defense: pokemonDetails.stats.find(
+              (stat) => stat.stat.name === "defense"
+            ).base_stat,
+          },
+          abilities: pokemonDetails.abilities,
+          height: pokemonDetails.height,
+          weight: pokemonDetails.weight,
+          species: pokemonDetails.species.url,
+          image: pokemonDetails.sprites.other["official-artwork"].front_default,
+          types: pokemonDetails.types,
+          description: description,
+        };
+
+        setPokemonDetails(formattedPokemon);
       } catch (error) {
         console.error("Error fetching pokemon details:", error);
       }
@@ -56,6 +87,7 @@ const DetailPage = () => {
     weight,
     order,
     types,
+    image,
     abilities,
     stats,
     sprites,
@@ -68,15 +100,10 @@ const DetailPage = () => {
         backgroundImage: `url(${imgUrl})`,
       }}
     >
-      <Link to={`/home`}>
-        <p className="back-button">BACK</p>
-      </Link>
       <div className="detail-card">
         <div className="detail-header">
           <h2 className="detail-title">{name}</h2>
-          <p className="detail-hp">
-            HP:{stats.find((stat) => stat.stat.name === "hp").base_stat}
-          </p>
+          <p className="detail-hp">HP:{stats.hp}</p>
         </div>
         <div className="detail-container">
           <div className="detail-img-container">
@@ -88,36 +115,40 @@ const DetailPage = () => {
               />
             </div>
             <div>
-              <img
-                className="detail-image"
-                src={sprites.other["official-artwork"].front_default}
-                alt={name}
-              />
+              <img className="detail-image" src={image} alt={name} />
               <p className="detail-order">{order}</p>
+              <div className="detail-stats">
+                <p>Attack: {stats.attack}</p>
+                <p>Defense: {stats.defense}</p>
+              </div>
             </div>
           </div>
-          <p className="detail-description">{description}</p>
-        </div>
-        <div className="detail-info">
-          <p className="detail-type">
-            Type: {types.map((type) => type.type.name).join(", ")}
-          </p>
-          <p>Height: {height / 10} m</p>
-          <p>Weight: {weight / 10} kg</p>
-          <p>
-            Abilities:
-            {abilities.map((ability) => ability.ability.name).join(", ")}
-          </p>
-          <div className="detail-stats">
-            <p>
-              Attack:
-              {stats.find((stat) => stat.stat.name === "attack").base_stat}
-            </p>
-            <p>
-              Defense:
-              {stats.find((stat) => stat.stat.name === "defense").base_stat}
-            </p>
+          <div className="detail-aside">
+            <p className="detail-abilities">Abilities:</p>
+            <div className="detail-ab-list">
+              <ol>
+                {abilities.map((ability) => (
+                  <li key={ability.ability.name}> ▪️ {ability.ability.name}</li>
+                ))}
+              </ol>
+            </div>
+            <div className="detail-info">
+              <p>Height: {height / 10} m</p>
+              <p>Weight: {weight / 10} kg</p>
+            </div>
           </div>
+        </div>
+        <p className="detail-type">
+          Type:{types.map((type) => type.type.name).join(", ")}
+        </p>
+        <p className="detail-description">{description}</p>
+        <div className="detail-buttons">
+          <Link to={`/allpokes`}>
+            <p className="detail-back">BACK TO POKÉDEX</p>
+          </Link>
+          <Link to="/gameplay">
+            <p className="detail-fight">GO TO FIGHT</p>
+          </Link>
         </div>
       </div>
     </div>
