@@ -8,7 +8,7 @@ import axios from "axios";
 // import UserProfile from "../../Components/Header/UserProfile";
 
 // import PokeCard from "../../components/PokeCard.jsx";
-import Header from "../../components/Header.jsx";
+import Header from "../../Components/Header.jsx";
 
 
 const AllPoke = () => {
