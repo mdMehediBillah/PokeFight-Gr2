@@ -3,6 +3,7 @@ import { GrLogout } from "react-icons/gr";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { URL } from "../../utils/myLocalURL.js";
+import { motion } from "framer-motion";
 
 import axios from "axios";
 
@@ -25,20 +26,40 @@ const UserProfile = () => {
       toast.error(error.response.data.message);
     }
   };
+  const userEmailVarient = {
+    hidde: {
+      opacity: 0,
+      x: -500,
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        type: "spring",
+        delay: 0.7,
+        duration: 0.5,
+      },
+    },
+  };
   return (
     <>
-      <div className="dropdown">
+      <motion.div
+        variants={userEmailVarient}
+        initial="hidde"
+        animate="visible"
+        className="dropdown"
+      >
         <div
           tabIndex={0}
           role="button"
-          className="btn bg-green-600 text-white m-1"
+          className="btn bg-cyan-600 text-white glass btn-xs"
         >
           <FaUserCircle />
           {userEmail}
         </div>
         <ul
           tabIndex={0}
-          className="dropdown-content menu bg-orange-300 z-[1] w-52 p-1 shadow text-black rounded font-semibold"
+          className="dropdown-content menu bg-red-600 z-[1] shadow text-white rounded font-semibold mt-1"
         >
           <li onClick={handleLogout}>
             <span>
@@ -48,7 +69,7 @@ const UserProfile = () => {
             </span>
           </li>
         </ul>
-      </div>
+      </motion.div>
     </>
   );
 };

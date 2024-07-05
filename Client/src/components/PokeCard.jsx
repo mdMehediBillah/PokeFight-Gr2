@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./PokeCard.css";
+import { motion } from "framer-motion";
+
 import electric from "./../assets/images/pokecard/electric.svg";
 
 const PokeCard = () => {
@@ -66,11 +68,17 @@ const PokeCard = () => {
   const { name, order, image, description, stats, types } = pokemonData;
 
   return (
-    <div className="pokecard">
+    <motion.div
+      whileHover={{ scale: 1.04 }}
+      transition={{ type: "spring", duration: 0.2, bounce: true }}
+      className="pokecard"
+    >
       <div className="pokecard-header">
         <h2 className="pokecard-title">{name}</h2>
 
-        <span className="pokecard-hp">HP: {stats.hp}</span>
+        <span className="pokecard-hp text-black font-semibold">
+          HP: {stats.hp}
+        </span>
       </div>
       <Link to={`/allpokes/${pokemonData.id}`}>
         <div className="pokecard-img-container">
@@ -90,10 +98,12 @@ const PokeCard = () => {
         </div>
       </Link>
       <div className="pokecard-body">
-        <p className="pokecard-type">
+        <p className="pokecard-type text-black font-bold">
           Type: {types.map((type) => type.type.name).join(", ")}
         </p>
-        <p className="pokecard-description">{description}</p>
+        <p className=" text-black line-clamp-2 py-6 pl-4 text-sm">
+          {description}
+        </p>
         <div className="pokecard-buttons">
           <Link to={`/allpokes/${pokemonData.id}`}>
             <p className="pokecard-details">DETAILS</p>
@@ -103,7 +113,7 @@ const PokeCard = () => {
           </Link>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

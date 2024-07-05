@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { URL } from "../utils/myLocalURL.js";
 import { motion } from "framer-motion";
+import logoURL from "../assets/pokeFight.png";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -46,10 +47,19 @@ const Login = () => {
         backgroundImage: `url(${backgroundImage})`,
       }}
     >
-      <motion.div
-        initial={{ opacity: 0.8, scale: 0.9 }}
+      <motion.img
+        src={logoURL}
+        alt="Pokefight logo"
+        className="absolute"
+        initial={{ opacity: 0, scale: 0.2 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.2 }}
+        transition={{ type: "spring", bounce: 10, duration: 0.2, delay: 0.2 }}
+      />
+
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.2, delay: 2 }}
         className="text-white p-8 rounded shadow-md w-full max-w-md "
         style={{
           background: "rgba(10,80,100,0.6)",
