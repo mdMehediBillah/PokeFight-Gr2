@@ -7,6 +7,8 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { URL } from "../utils/myLocalURL.js";
 
+import logoURL from "../assets/pokeFight.png";
+
 const Signup = () => {
   const navigate = useNavigate();
 
@@ -55,7 +57,9 @@ const Signup = () => {
       handleReset();
       navigate("/login");
     } catch (error) {
-      toast.error(error.response.data.message);
+      // console.log(error.message);
+      toast.error("Please fill all information in the form");
+      // toast.error(error.response.data.message);
     }
   };
 
@@ -66,6 +70,8 @@ const Signup = () => {
         backgroundImage: `url(${backgroundImage})`,
       }}
     >
+      <img src={logoURL} alt="Pokefight logo" className="absolute" />
+
       <motion.div
         initial={{ opacity: 0.8, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
