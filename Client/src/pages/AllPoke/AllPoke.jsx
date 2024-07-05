@@ -2,6 +2,7 @@ import "./AllPoke.css";
 import { useState, useEffect } from "react";
 import "../HomePage/HomePage.css";
 import imgUrl from "../../images/homeBg.jpg";
+import pokeFight from "../../assets/pokeFight.png";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 // import axios from "axios";
@@ -115,14 +116,13 @@ const AllPoke = () => {
       className="main homeBg min-h-screen bg-cover bg-center bg-no-repeat w-[100%]"
       style={{ backgroundImage: `url(${imgUrl})` }}
     >
-      {" "}
       <motion.h1
         variants={titleContainerVarient}
         initial="hidden"
         animate="visible"
         className="text-center pt-8 text-4xl font-semibold"
       >
-        {<Header />}
+        <img src={pokeFight} alt="pokefight icon" className="w-72" />{" "}
       </motion.h1>
       {/* <UserProfile /> */}
       {/* <div className="pokecard">

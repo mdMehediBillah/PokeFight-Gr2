@@ -1,9 +1,8 @@
-import "./GamePage.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import imgUrl from "../../images/gamePlayBg.jpg";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 //import { useLocation } from "react-router-dom";
 import axios from "axios";
 
