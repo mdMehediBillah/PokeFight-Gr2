@@ -1,71 +1,88 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./PokeCard.css";
 import { motion } from "framer-motion";
 
 import electric from "./../assets/images/pokecard/electric.svg";
+import { fetchRandomPokemon } from "../utils/randomPokeUtils";
 
 const PokeCard = () => {
   const [pokemonData, setPokemonData] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchRandomPokemon = async () => {
-      // Generate a random Pokemon ID between 1 and 898 (inclusive)
-      const randomPokemonId = Math.floor(Math.random() * 898) + 1;
-
+    const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `https://pokeapi.co/api/v2/pokemon/${randomPokemonId}`
-        );
-        const pokemonData = response.data;
-
-        const speciesResponse = await axios.get(
-          `https://pokeapi.co/api/v2/pokemon-species/${randomPokemonId}`
-        );
-        const speciesData = speciesResponse.data;
-        const description = speciesData.flavor_text_entries.find(
-          (entry) => entry.language.name === "en"
-        ).flavor_text;
-
-        // Create a structured Pokemon object
-        const formattedPokemon = {
-          id: pokemonData.id,
-          name: pokemonData.name,
-          order: pokemonData.order,
-          stats: {
-            hp: pokemonData.stats.find((stat) => stat.stat.name === "hp")
-              .base_stat,
-            attack: pokemonData.stats.find(
-              (stat) => stat.stat.name === "attack"
-            ).base_stat,
-            defense: pokemonData.stats.find(
-              (stat) => stat.stat.name === "defense"
-            ).base_stat,
-          },
-          abilities: pokemonData.abilities,
-          height: pokemonData.height,
-          weight: pokemonData.weight,
-          species: pokemonData.species.url,
-          image: pokemonData.sprites.other["official-artwork"].front_default,
-          types: pokemonData.types,
-          description: description,
-        };
-
-        setPokemonData(formattedPokemon);
+        const pokemon = await fetchRandomPokemon();
+        setPokemonData(pokemon);
       } catch (error) {
         console.error("Error fetching random pokemon:", error);
       }
     };
 
-    fetchRandomPokemon();
-  }, []); // Empty dependency array to run useEffect only once on component mount
+    fetchData();
+  }, []);
+  //   const fetchRandomPokemon = async () => {
+  //     // Generate a random Pokemon ID between 1 and 898 (inclusive)
+  //     const randomPokemonId = Math.floor(Math.random() * 898) + 1;
+
+  //     try {
+  //       const response = await axios.get(
+  //         `https://pokeapi.co/api/v2/pokemon/${randomPokemonId}`
+  //       );
+  //       const pokemonData = response.data;
+
+  //       const speciesResponse = await axios.get(
+  //         `https://pokeapi.co/api/v2/pokemon-species/${randomPokemonId}`
+  //       );
+  //       const speciesData = speciesResponse.data;
+  //       const description = speciesData.flavor_text_entries.find(
+  //         (entry) => entry.language.name === "en"
+  //       ).flavor_text;
+
+  //       // Create a structured Pokemon object
+  //       const formattedPokemon = {
+  //         id: pokemonData.id,
+  //         name: pokemonData.name,
+  //         order: pokemonData.order,
+  //         stats: {
+  //           hp: pokemonData.stats.find((stat) => stat.stat.name === "hp")
+  //             .base_stat,
+  //           attack: pokemonData.stats.find(
+  //             (stat) => stat.stat.name === "attack"
+  //           ).base_stat,
+  //           defense: pokemonData.stats.find(
+  //             (stat) => stat.stat.name === "defense"
+  //           ).base_stat,
+  //         },
+  //         abilities: pokemonData.abilities,
+  //         height: pokemonData.height,
+  //         weight: pokemonData.weight,
+  //         species: pokemonData.species.url,
+  //         image: pokemonData.sprites.other["official-artwork"].front_default,
+  //         types: pokemonData.types,
+  //         description: description,
+  //       };
+
+  //       setPokemonData(formattedPokemon);
+  //     } catch (error) {
+  //       console.error("Error fetching random pokemon:", error);
+  //     }
+  //   };
+
+  //   fetchRandomPokemon();
+  // }, []); // Empty dependency array to run useEffect only once on component mount
 
   if (!pokemonData) {
     return <div>Loading...</div>;
   }
 
   const { name, order, image, description, stats, types } = pokemonData;
+
+  const handleFightClick = () => {
+    navigate("/gameplay", { state: { selectedPokemon: pokemonData } });
+  };
 
   return (
     <motion.div
@@ -101,16 +118,16 @@ const PokeCard = () => {
         <p className="pokecard-type text-black font-bold">
           Type: {types.map((type) => type.type.name).join(", ")}
         </p>
-        <p className=" text-black line-clamp-2 px-4 py-6 text-sm">
+        <p className=" text-black line-clamp-2 py-6 pl-4 text-sm">
           {description}
         </p>
         <div className="pokecard-buttons">
           <Link to={`/allpokes/${pokemonData.id}`}>
             <p className="pokecard-details">DETAILS</p>
           </Link>
-          <Link to="/gameplay" state={{ selectedPokemon: pokemonData }}>
-            <p className="pokecard-fgt">FIGHT</p>
-          </Link>
+          <button className="pokecard-fight" onClick={handleFightClick}>
+            FIGHT
+          </button>
         </div>
       </div>
     </motion.div>
