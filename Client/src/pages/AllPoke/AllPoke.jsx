@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import "../HomePage/HomePage.css";
 import imgUrl from "../../images/homeBg.jpg";
 import pokeFight from "../../assets/pokeFight.png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 // import axios from "axios";
 import UserProfile from "../../Components/Header/UserProfile";
