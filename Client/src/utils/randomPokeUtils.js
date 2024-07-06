@@ -1,4 +1,6 @@
+
 import axios from "axios";
+
 
 export const fetchRandomPokemon = async () => {
   const randomPokemonId = Math.floor(Math.random() * 898) + 1;
@@ -12,7 +14,9 @@ export const fetchRandomPokemon = async () => {
   );
   const speciesData = speciesResponse.data;
   const description = speciesData.flavor_text_entries.find(
+
     (entry) => entry.language.name === "en"
+
   ).flavor_text;
 
   return {
@@ -20,17 +24,21 @@ export const fetchRandomPokemon = async () => {
     name: pokemonData.name,
     order: pokemonData.order,
     stats: {
+
       hp: pokemonData.stats.find((stat) => stat.stat.name === "hp").base_stat,
       attack: pokemonData.stats.find((stat) => stat.stat.name === "attack")
         .base_stat,
       defense: pokemonData.stats.find((stat) => stat.stat.name === "defense")
+
         .base_stat,
     },
     abilities: pokemonData.abilities,
     height: pokemonData.height,
     weight: pokemonData.weight,
     species: pokemonData.species.url,
+
     image: pokemonData.sprites.other["official-artwork"].front_default,
+
     types: pokemonData.types,
     description: description,
   };

@@ -103,6 +103,7 @@ const Gamepage = () => {
 
       <div className="fight-container flex flex-row items-center">
         {" "}
+
         <motion.div
           whileHover={{ scale: 1.04 }}
           transition={{ type: "spring", duration: 0.2, bounce: true }}
@@ -206,6 +207,7 @@ const Gamepage = () => {
             </p>
           </div>
         </motion.div>
+
       </div>
       <div className="fight-button-container text-center mt-4">
         <button
