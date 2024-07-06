@@ -6,7 +6,7 @@
   border-radius: 20px;
   box-shadow: 0px 0px 10px #4336ffa2;
   min-width: 300px;
-  /* max-width: 380px; */
+  max-width: 330px;
   height: 430px;
   /* text-align: center; */
   font-family: "Roboto", sans-serif;
@@ -102,12 +102,12 @@
 .pokecard-description {
   position: relative;
   top: 20px;
-  font-size: 0.8rem;
-  padding: 0.4rem 0.8rem 1rem 1rem;
-  margin-block: 3px;
-  height: 75px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  /* font-size: 0.8rem; */
+  /* padding: 0.4rem 0.8rem 1rem 1rem; */
+  /* margin-block: 3px; */
+  /* height: 75px; */
+  /* overflow: hidden; */
+  /* text-overflow: ellipsis; */
   line-height: 1rem;
 }
 
@@ -146,7 +146,7 @@
   cursor: pointer;
   color: #ffffff;
   border: 3px solid #ffffff;
-  border-radius: 5px;
+  border-radius: 10px;
   padding-block: 2px;
   padding-inline: 15px;
   box-shadow: 0px 0px 3px #000000d2;
@@ -158,13 +158,11 @@
 }
 
 .pokecard-fgt {
-  background: #b13f3f;
+  background: #c50000;
   /* background-image: url("../assets/fight_icon.svg"); */
   background-size: 30px;
   background-repeat: no-repeat;
   background-position: 5px;
-  /* padding-left: 45px; */
-  padding-right: 10px;
 }
 
 .pokecard-details {
@@ -173,6 +171,4 @@
   background-size: 30px;
   background-repeat: no-repeat;
   background-position: 8px;
-  /* padding-left: 45px; */
-  padding-right: 10px;
 }

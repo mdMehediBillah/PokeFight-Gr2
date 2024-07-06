@@ -133,8 +133,8 @@ const DetailPage = () => {
               </ol>
             </div>
             <div className="detail-info">
-              <p>Height: {height / 10} m</p>
-              <p>Weight: {weight / 10} kg</p>
+              <p>HEIGHT: {height / 10} m</p>
+              <p>WEIGHT: {weight / 10} kg</p>
             </div>
           </div>
         </div>
@@ -143,11 +143,11 @@ const DetailPage = () => {
         </p>
         <p className="detail-description">{description}</p>
         <div className="detail-buttons">
-          <Link to={`/allpokes`}>
+          <Link to="/allpokes">
             <p className="detail-back">BACK TO POKÉDEX</p>
           </Link>
-          <Link to="/gameplay">
-            <p className="detail-fight">GO TO FIGHT</p>
+          <Link to="/gameplay" state={{ selectedPokemon: pokemonDetails }}>
+            <p className="detail-fgt">FIGHT</p>
           </Link>
         </div>
       </div>
