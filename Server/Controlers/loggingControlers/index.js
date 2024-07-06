@@ -6,6 +6,7 @@ export const login = async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await pokeUserModel.findOne({ email });
+    // console.log(user);
     const userName = user.first_name;
     if (user && bcrypt.compareSync(password, user.password)) {
       const token = generateToken(user);

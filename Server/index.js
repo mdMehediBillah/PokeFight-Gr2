@@ -9,6 +9,7 @@ import connectDB from "./db/db.js";
 // importing routes
 import userRouter from "./Routes/pokeRoutes/index.js";
 import loggingRoutes from "./Routes/loginRoutes/index.js";
+import scoreRouter from "./Routes/ScoreRoutes/index.js";
 
 // create application from express
 const app = express();
@@ -37,6 +38,7 @@ app.use((req, res, next) => {
 app.use("/api/v1/", loggingRoutes);
 app.use("/api/v1/users", userRouter);
 
+app.use("/api/v1/scores", scoreRouter);
 // app listening port
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
