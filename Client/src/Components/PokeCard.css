@@ -163,8 +163,6 @@
   background-size: 30px;
   background-repeat: no-repeat;
   background-position: 5px;
-  /* padding-left: 45px; */
-  padding-right: 10px;
 }
 
 .pokecard-details {
@@ -173,6 +171,4 @@
   background-size: 30px;
   background-repeat: no-repeat;
   background-position: 8px;
-  /* padding-left: 45px; */
-  padding-right: 10px;
 }

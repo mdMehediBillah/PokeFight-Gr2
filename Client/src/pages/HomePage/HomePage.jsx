@@ -6,7 +6,6 @@ import UserProfile from "../../Components/Header/UserProfile.jsx";
 import { useEffect } from "react";
 import { FaFacebookF, FaInstagram, FaTiktok } from "react-icons/fa6";
 import pokeIcon from "../../assets/favicon.png";
-
 import PokeCard from "../../Components/PokeCard.jsx";
 import Header from "../../Components/Header.jsx";
 
@@ -122,22 +121,22 @@ const HomePage = () => {
             </motion.h2>{" "}
           </Link>
         </div>
-        <motion.h3
-          variants={userNameVarient}
-          initial="hidde"
-          animate="visible"
-          className="text-black py-1 font-semibold text-black px-3 text-center"
-        >
-          {userName}
-        </motion.h3>
         <motion.h1
           variants={titleContainerVarient}
           initial="hidde"
           animate="visible"
-          className="text-center pt-8 text-4xl font-semibold"
+          className="text-center -mt-[25px] text-4xl font-semibold"
         >
           {<Header />}
         </motion.h1>
+        <motion.h3
+          variants={userNameVarient}
+          initial="hidde"
+          animate="visible"
+          className="text-black py-1 font-semibold text-black px-3 text-center uppercase"
+        >
+          Welcome, {userName}
+        </motion.h3>
         <motion.h2
           variants={subTitleContainerVarient}
           initial="hidde"

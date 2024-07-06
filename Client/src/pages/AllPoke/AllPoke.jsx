@@ -125,7 +125,7 @@ const AllPoke = () => {
       >
         {<Header />}
       </motion.h1>
-      style={{ backgroundImage: `url(${imgUrl})` }}>
+      style={{ backgroundImage: `url(${imgUrl})` }}
       <motion.h1
         variants={titleContainerVarient}
         initial="hidden"
@@ -134,45 +134,45 @@ const AllPoke = () => {
       >
         <img src={pokeFight} alt="pokefight icon" className="w-72" />{" "}
       </motion.h1>
-      {/* <UserProfile /> */}
-      {/* <div className="pokecard">
-      <div className="pokecard-header">
-        <h2 className="pokecard-title">{name}</h2>
+      <UserProfile />
+      <div className="pokecard">
+        <div className="pokecard-header">
+          <h2 className="pokecard-title">{name}</h2>
 
-        <span className="pokecard-hp">HP: {stats.hp}</span>
-      </div>
-      <Link to={`/allpokes/${pokemonData.id}`}>
-        <div className="pokecard-img-container">
-          <div className="pokecard-background">
-            <img
-              src={electric}
-              alt="Pokecard background"
-              className="pokecard-background_img"
-            />
+          <span className="pokecard-hp">HP: {stats.hp}</span>
+        </div>
+        <Link to={`/allpokes/${pokemonData.id}`}>
+          <div className="pokecard-img-container">
+            <div className="pokecard-background">
+              <img
+                src={electric}
+                alt="Pokecard background"
+                className="pokecard-background_img"
+              />
+            </div>
+            <img className="pokecard-image" src={image} alt={name} />
+            <p className="pokecard-order">{order}</p>
+            <div className="pokecard-stats">
+              <span className="pokecard-attack">Attack: {stats.attack}</span>
+              <span className="pokecard-defense">Defense: {stats.defense}</span>
+            </div>
           </div>
-          <img className="pokecard-image" src={image} alt={name} />
-          <p className="pokecard-order">{order}</p>
-          <div className="pokecard-stats">
-            <span className="pokecard-attack">Attack: {stats.attack}</span>
-            <span className="pokecard-defense">Defense: {stats.defense}</span>
+        </Link>
+        <div className="pokecard-body">
+          <p className="pokecard-type">
+            Type: {types.map((type) => type.type.name).join(", ")}
+          </p>
+          <p className="pokecard-description">{description}</p>
+          <div className="pokecard-buttons">
+            <Link to={`/allpokes/${pokemonData.id}`}>
+              <p className="pokecard-details">DETAILS</p>
+            </Link>
+            <Link to="/gameplay">
+              <p className="pokecard-fight">FIGHT</p>
+            </Link>
           </div>
         </div>
-      </Link>
-      <div className="pokecard-body">
-        <p className="pokecard-type">
-          Type: {types.map((type) => type.type.name).join(", ")}
-        </p>
-        <p className="pokecard-description">{description}</p>
-        <div className="pokecard-buttons">
-          <Link to={`/allpokes/${pokemonData.id}`}>
-            <p className="pokecard-details">DETAILS</p>
-          </Link>
-          <Link to="/gameplay">
-            <p className="pokecard-fight">FIGHT</p>
-          </Link>
-        </div>
       </div>
-    </div> */}
       <section className="mt-5">
         <div className="flex">
           <input

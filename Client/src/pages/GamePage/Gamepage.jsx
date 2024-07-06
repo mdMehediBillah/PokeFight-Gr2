@@ -1,15 +1,19 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import imgUrl from "../../images/gamePlayBg.jpg";
 import electric from "../../assets/images/pokecard/electric.svg";
+import PokeFight from "../../assets/pokeFight.png";
 import { useEffect, useState } from "react";
-//import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion";
+import vs from "../../assets/vs.svg";
 
 const Gamepage = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const selectedPokemon = location.state?.selectedPokemon;
+  const [selectedPokemon, setSelectedPokemon] = useState(
+    location.state?.selectedPokemon
+  );
+  const [selectedPokemonData, setSelectedPokemonData] = useState(null);
   const [randomPokemon, setRandomPokemon] = useState(null);
   const [winner, setWinner] = useState(null);
 
@@ -19,6 +23,33 @@ const Gamepage = () => {
       return;
     }
 
+    const fetchSelectedPokemonData = async () => {
+      try {
+        const response = await axios.get(
+          `https://pokeapi.co/api/v2/pokemon/${selectedPokemon.id}`
+        );
+        setSelectedPokemonData(response.data);
+      } catch (error) {
+        console.error("Fehler beim Abrufen der Pokémon-Daten:", error);
+      }
+    };
+
+    fetchSelectedPokemonData();
+  }, [selectedPokemon, navigate]);
+
+  useEffect(() => {
+    if (selectedPokemonData) {
+      const updatedSelectedPokemon = {
+        ...selectedPokemon,
+        image:
+          selectedPokemonData.sprites.other["showdown"]?.front_default ||
+          selectedPokemonData.sprites.other["official-artwork"].front_default,
+      };
+      setSelectedPokemon(updatedSelectedPokemon);
+    }
+  }, [selectedPokemonData]);
+
+  useEffect(() => {
     const fetchRandomPokemon = async () => {
       const randomPokemonId = Math.floor(Math.random() * 898) + 1;
       const response = await axios.get(
@@ -51,7 +82,9 @@ const Gamepage = () => {
         height: pokemonData.height,
         weight: pokemonData.weight,
         species: pokemonData.species.url,
-        image: pokemonData.sprites.other["official-artwork"].front_default,
+        image:
+          pokemonData.sprites.other["showdown"]?.front_default ||
+          pokemonData.sprites.other["official-artwork"].front_default,
         types: pokemonData.types,
         description: description,
       };
@@ -60,7 +93,7 @@ const Gamepage = () => {
     };
 
     fetchRandomPokemon();
-  }, [selectedPokemon, navigate]);
+  }, []);
 
   useEffect(() => {
     if (selectedPokemon && randomPokemon) {
@@ -97,36 +130,27 @@ const Gamepage = () => {
 
   return (
     <div
-      className=" homeBg min-h-screen bg-cover bg-center bg-no-repeat w-[100%]"
-      style={{
-        backgroundImage: `url(${imgUrl})`,
-      }}
+      className="homeBg min-h-screen bg-cover bg-center bg-no-repeat w-[100%]"
+      style={{ backgroundImage: `url(${imgUrl})` }}
     >
-      <h1 className="text-center bg-cyan-50 pt-8 text-4xl font-semibold">
-        {" "}
-        Fight with Pokemon
-      </h1>
-      <div className="flex gap-4 w-72 bg-cyan-50 justify-center mx-auto font-semibold mt-6">
-        <Link to="/home">
-          <p>Change</p>
+      <h1 className="pt-4 w-[450px]">
+        <Link to={"/home"}>
+          <img src={PokeFight} alt="Pokefight logo" />
         </Link>
-        <p>Fight</p>
-      </div>
-      <div className="flex gap-4 w-72 bg-cyan-50 justify-center mx-auto font-semibold mt-6">
+      </h1>
+      <div className="flex gap-4 w-72 justify-center mx-auto font-semibold px-12 ">
         <Link to="/score">
           <p>Scores</p>
         </Link>
       </div>
 
       <div className="fight-container flex flex-row items-center pb-8 h-full">
-        {" "}
         <motion.div
           whileHover={{ scale: 1.04 }}
           transition={{ type: "spring", duration: 0.2, bounce: true }}
           className="pokecard"
         >
           <div className="pokecard-header">
-            {" "}
             <h2 className="pokecard-title">{selectedPokemon.name}</h2>
             <p className="pokecard-hp text-black font-semibold">
               HP: {selectedPokemon.stats.hp}
@@ -141,7 +165,7 @@ const Gamepage = () => {
               />
             </div>
             <img
-              className="pokecard-image"
+              className="pokecard-image w-auto h-[70%]"
               src={selectedPokemon.image}
               alt={selectedPokemon.name}
             />
@@ -161,30 +185,31 @@ const Gamepage = () => {
               Type:{" "}
               {selectedPokemon.types.map((type) => type.type.name).join(", ")}
             </p>
-            <p className=" text-black line-clamp-2 px-4 py-6 text-sm">
+            <p className="text-black line-clamp-2 px-4 py-6 text-sm">
               {selectedPokemon.description}
             </p>
             <div className="pokecard-buttons">
               <Link to={`/allpokes`}>
                 <p className="pokecard-details">BACK</p>
               </Link>
-              <Link
-                to=""
-                state={{ selectedPokemon: selectedPokemon.pokemonData }}
+
+              <p
+                onClick={() => window.location.reload()}
+                className="pokecard-fgt"
               >
-                <p className="pokecard-fgt">ATTACK</p>
-              </Link>
+                FIGHT AGAIN
+              </p>
             </div>
           </div>
         </motion.div>
-        <div className="vs">VS</div>
+        <img src={vs} alt="VS" className="w-[150px] px-4" />
+
         <motion.div
           whileHover={{ scale: 1.04 }}
           transition={{ type: "spring", duration: 0.2, bounce: true }}
           className="pokecard"
         >
           <div className="pokecard-header">
-            {" "}
             <h2 className="pokecard-title">{randomPokemon.name}</h2>
             <p className="pokecard-hp text-black font-semibold">
               HP: {randomPokemon.stats.hp}
@@ -199,7 +224,7 @@ const Gamepage = () => {
               />
             </div>
             <img
-              className="pokecard-image"
+              className="pokecard-image w-auto h-[70%]"
               src={randomPokemon.image}
               alt={randomPokemon.name}
             />
@@ -219,31 +244,23 @@ const Gamepage = () => {
               Type:{" "}
               {randomPokemon.types.map((type) => type.type.name).join(", ")}
             </p>
-            <p className=" text-black line-clamp-2 px-4 py-6 text-sm">
+            <p className="text-black px-4 py-6 text-sm">
               {randomPokemon.description}
             </p>
-            <div className="pokecard-buttons">
-              <Link to={`/allpokes`}>
-                <p className="pokecard-details">BACK</p>
-              </Link>
-              <Link to="" state={{ randomPokemon: randomPokemon.pokemonData }}>
-                <p className="pokecard-fgt">ATTACK</p>
-              </Link>
-            </div>
           </div>
         </motion.div>
-        <div className="result">
-          <h2>{winner ? `${winner} wins!` : "It's a tie!"}</h2>
-        </div>
-        <div className="fight-buttons">
-          <Link to="/home">
-            <button className="btn">Back to Home</button>
-          </Link>
-          <button className="btn" onClick={() => window.location.reload()}>
-            Fight Again
-          </button>
-        </div>
       </div>
+      <div className="result">
+        <h2>{winner ? `${winner} wins!` : "It's a tie!"}</h2>
+      </div>
+      {/* <div className="fight-buttons">
+        <Link to="/home">
+          <button className="btn">Back to Home</button>
+        </Link>
+        <button className="btn" onClick={() => window.location.reload()}>
+          Fight Again
+        </button>
+      </div> */}
     </div>
   );
 };

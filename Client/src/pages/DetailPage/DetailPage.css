@@ -23,8 +23,8 @@
 }
 
 .detail-card {
-  background: linear-gradient(rgb(223, 164, 1), rgb(236, 106, 20)) padding-box,
-    linear-gradient(to right, darkblue, darkorchid) border-box;
+  background: linear-gradient(rgb(223, 90, 1), rgb(248, 229, 142)) padding-box,
+    linear-gradient(to right, darkblue, rgb(158, 19, 228)) border-box;
   border: 10px solid transparent;
   border-radius: 20px;
   box-shadow: 5px 5px 20px #000000;
@@ -107,7 +107,7 @@
   padding-top: 5px;
   text-align: left;
   font-size: 1.1em;
-  font-weight: 800;
+  font-weight: 700;
   margin-top: 5px;
   margin-bottom: 5px;
   text-transform: uppercase;
@@ -118,11 +118,10 @@
   flex-direction: row;
   gap: 5px;
   color: #000000;
-  font-weight: 900;
+  font-weight: 700;
   padding-inline: 15px;
   text-align: left;
   font-size: 1.1em;
-  font-weight: 500;
   text-transform: uppercase;
 }
 
@@ -142,7 +141,7 @@
   /* position: relative; */
   width: 100%;
   font-size: 1.05em;
-  color: #ffffff;
+  color: #000000;
   padding-inline: 35px;
   padding-top: 20px;
   text-align: left;
@@ -169,10 +168,6 @@
   font-size: 1.1em;
   margin-top: 35px;
   margin-bottom: 5px;
-  /* display: flex;
-  flex-direction: row; */
-  /* align-items: flex-end;
-  align-self: flex-end; */
 }
 
 .detail-stats {
