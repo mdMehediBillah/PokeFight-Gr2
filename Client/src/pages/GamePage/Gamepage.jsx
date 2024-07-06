@@ -1,4 +1,3 @@
-import "./GamePage.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import imgUrl from "../../images/gamePlayBg.jpg";
