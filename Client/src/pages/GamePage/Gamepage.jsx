@@ -5,6 +5,7 @@ import imgUrl from "../../images/gamePlayBg.jpg";
 import { useEffect, useState } from "react";
 //import { useLocation } from "react-router-dom";
 import axios from "axios";
+import { fetchRandomPokemon } from "../../utils/randomPokeUtils";
 
 const Gamepage = () => {
   const location = useLocation();
@@ -12,6 +13,7 @@ const Gamepage = () => {
   const selectedPokemon = location.state?.selectedPokemon;
   const [randomPokemon, setRandomPokemon] = useState(null);
   const [winner, setWinner] = useState(null);
+  const [showResult, setShowResult] = useState(false);
 
   useEffect(() => {
     if (!selectedPokemon) {
@@ -19,51 +21,16 @@ const Gamepage = () => {
       return;
     }
 
-    const fetchRandomPokemon = async () => {
-      const randomPokemonId = Math.floor(Math.random() * 898) + 1;
-      const response = await axios.get(
-        `https://pokeapi.co/api/v2/pokemon/${randomPokemonId}`
-      );
-      const pokemonData = response.data;
-
-      const speciesResponse = await axios.get(
-        `https://pokeapi.co/api/v2/pokemon-species/${randomPokemonId}`
-      );
-      const speciesData = speciesResponse.data;
-      const description = speciesData.flavor_text_entries.find(
-        (entry) => entry.language.name === "en"
-      ).flavor_text;
-
-      const formattedPokemon = {
-        id: pokemonData.id,
-        name: pokemonData.name,
-        order: pokemonData.order,
-        stats: {
-          hp: pokemonData.stats.find((stat) => stat.stat.name === "hp")
-            .base_stat,
-          attack: pokemonData.stats.find((stat) => stat.stat.name === "attack")
-            .base_stat,
-          defense: pokemonData.stats.find(
-            (stat) => stat.stat.name === "defense"
-          ).base_stat,
-        },
-        abilities: pokemonData.abilities,
-        height: pokemonData.height,
-        weight: pokemonData.weight,
-        species: pokemonData.species.url,
-        image: pokemonData.sprites.other["official-artwork"].front_default,
-        types: pokemonData.types,
-        description: description,
-      };
-
-      setRandomPokemon(formattedPokemon);
+    const fetchData = async () => {
+      const pokemon = await fetchRandomPokemon();
+      setRandomPokemon(pokemon);
     };
 
-    fetchRandomPokemon();
+    fetchData();
   }, [selectedPokemon, navigate]);
 
   useEffect(() => {
-    if (selectedPokemon && randomPokemon) {
+    if (selectedPokemon && randomPokemon && showResult) {
       const determineWinner = () => {
         const selectedTotal =
           selectedPokemon.stats.hp +
@@ -85,11 +52,26 @@ const Gamepage = () => {
 
       determineWinner();
     }
-  }, [selectedPokemon, randomPokemon]);
+  }, [selectedPokemon, randomPokemon, showResult]);
 
-  if (!selectedPokemon) {
-    return null;
-  }
+  const saveResult = () => {
+    const fightResult = {
+      selectedPokemon: selectedPokemon.name,
+      randomPokemon: randomPokemon.name,
+      winner: winner,
+      date: new Date().toLocaleString(),
+    };
+
+    const existingResults =
+      JSON.parse(localStorage.getItem("fightResults")) || [];
+    existingResults.push(fightResult);
+    localStorage.setItem("fightResults", JSON.stringify(existingResults));
+    alert("Fight result saved!");
+  };
+
+  // if (!selectedPokemon) {
+  //   return null;
+  // }
 
   if (!randomPokemon) {
     return <div>Loading...</div>;
@@ -108,9 +90,9 @@ const Gamepage = () => {
       </h1>
       <div className="flex gap-4 w-72 bg-cyan-50 justify-center mx-auto font-semibold mt-6">
         <Link to="/home">
-          <p>Change</p>
+          <p>Change Pokemon</p>
         </Link>
-        <p>Fight</p>
+        {/* <p>Fight</p> */}
       </div>
       <div className="flex gap-4 w-72 bg-cyan-50 justify-center mx-auto font-semibold mt-6">
         <Link to="/score">
@@ -118,9 +100,9 @@ const Gamepage = () => {
         </Link>
       </div>
 
-      <div className="fight-container flex flex-row items-center pb-8 h-full">
+      <div className="fight-container flex flex-row items-center">
         {" "}
-        <div className="pokecard border rounded-lg p-4 mx-4 mb-8 text-center w-72 h-90">
+        <div className="pokecard border rounded-lg p-4 mx-4 mb-8 text-center">
           {" "}
           <h2 className="pokecard-title">{selectedPokemon.name}</h2>
           <img
@@ -159,18 +141,28 @@ const Gamepage = () => {
           </p>
           <p className="pokecard-description">{randomPokemon.description}</p>
         </div>
-        <div className="result">
+      </div>
+      <div className="fight-button-container text-center mt-4">
+        <button
+          className="fight-button bg-blue-500 text-white px-4 py-2 rounded"
+          onClick={() => setShowResult(true)}
+        >
+          FIGHT
+        </button>
+      </div>
+
+      {showResult && (
+        <div className="result text-center text-white px-4 py-2 mt-4">
           <h2>{winner ? `${winner} wins!` : "It's a tie!"}</h2>
-        </div>
-        <div className="fight-buttons">
-          <Link to="/home">
-            <button className="btn">Back to Home</button>
-          </Link>
-          <button className="btn" onClick={() => window.location.reload()}>
-            Fight Again
+
+          <button
+            className="save-button bg-green-500 text-white px-4 py-2 rounded mt-4"
+            onClick={saveResult}
+          >
+            Save Result
           </button>
         </div>
-      </div>
+      )}
     </div>
   );
 };
