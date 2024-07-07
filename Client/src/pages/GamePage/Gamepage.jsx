@@ -110,32 +110,19 @@ const Gamepage = () => {
         backgroundImage: `url(${imgUrl})`,
       }}
     >
-      {/* modal */}
-      {showModal === "success" && (
-        <SuccessModal
-          closeModal={setShowModal}
-          selectedPokemon={selectedPokemon}
-        />
-      )}
-      {showModal === "fail" && (
-        <LoseModal
-          closeModal={setShowModal}
-          selectedPokemon={selectedPokemon}
-        />
-      )}
+      <img
+        src={PokeFight}
+        alt="Pokefight logo"
+        className="w-[400px] justify-center"
+      />
 
-      {/* {winnerPokemon === userSelectPokemon ? <SuccessModal /> : <LoseModal />} */}
-      <h1 className="text-center bg-cyan-50 pt-8 text-4xl font-semibold">
-        {" "}
-        Fight with Pokemon
-      </h1>
-      <div className="flex gap-4 w-72 bg-cyan-50 justify-center mx-auto font-semibold mt-6">
+      <div className="flex gap-4 w-72 bg-cyan-50 justify-center mx-auto font-semibold mt-2">
         <Link to="/home">
           <p>Change Pokemon</p>
         </Link>
         {/* <p>Fight</p> */}
       </div>
-      <div className="flex gap-4 w-72 bg-cyan-50 justify-center mx-auto font-semibold mt-6">
+      <div className="flex gap-4 w-72 bg-cyan-50 justify-center mx-auto font-semibold mt-2 mb-6">
         <Link to="/score">
           <p>Scores</p>
         </Link>
@@ -144,8 +131,9 @@ const Gamepage = () => {
       <div className="fight-container flex flex-row items-center">
         {" "}
         <motion.div
-          whileHover={{ scale: 1.04 }}
-          transition={{ type: "spring", duration: 0.2, bounce: true }}
+          initial={{ y: 200, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ type: "tween", duration: 0.5, delay: 1.5 }}
           className="pokecard"
         >
           <div className="pokecard-header">
@@ -164,7 +152,7 @@ const Gamepage = () => {
             </div>
             <img
               className="pokecard-image w-auto h-[70%]"
-              src={selectedPokemon.image}
+              src={selectedPokemon.image2}
               alt={selectedPokemon.name}
             />
             <p className="pokecard-order">{selectedPokemon.order}</p>
@@ -183,10 +171,10 @@ const Gamepage = () => {
               Type:{" "}
               {selectedPokemon.types.map((type) => type.type.name).join(", ")}
             </p>
-            <p className="text-black line-clamp-2 px-4 py-6 text-sm">
+            <p className="text-black px-4 py-6 text-sm">
               {selectedPokemon.description}
             </p>
-            <div className="pokecard-buttons">
+            {/* <div className="pokecard-buttons">
               <Link to={`/home`}>
                 <p className="pokecard-details">BACK</p>
               </Link>
@@ -197,13 +185,25 @@ const Gamepage = () => {
               >
                 FIGHT AGAIN
               </p>
-            </div>
+            </div> */}
           </div>
         </motion.div>
-        <img src={vs} alt="VS" className="w-[150px] px-4" />
         <motion.div
-          whileHover={{ scale: 1.04 }}
-          transition={{ type: "spring", duration: 0.2, bounce: true }}
+          initial={{ opacity: 0, scale: 5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{
+            type: "spring",
+            bounce: 100,
+            duration: 0.2,
+            delay: 0.8,
+          }}
+        >
+          <img src={vs} alt="VS" className="w-[150px] px-4" />
+        </motion.div>
+        <motion.div
+          initial={{ y: -200, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ type: "tween", duration: 0.5, delay: 1.5 }}
           className="pokecard"
         >
           <div className="pokecard-header">
@@ -222,7 +222,7 @@ const Gamepage = () => {
             </div>
             <img
               className="pokecard-image w-auto h-[70%]"
-              src={randomPokemon.image}
+              src={randomPokemon.image2}
               alt={randomPokemon.name}
             />
             <p className="pokecard-order">{randomPokemon.order}</p>

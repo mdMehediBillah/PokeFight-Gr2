@@ -102,12 +102,6 @@
 .pokecard-description {
   position: relative;
   top: 20px;
-  /* font-size: 0.8rem; */
-  /* padding: 0.4rem 0.8rem 1rem 1rem; */
-  /* margin-block: 3px; */
-  /* height: 75px; */
-  /* overflow: hidden; */
-  /* text-overflow: ellipsis; */
   line-height: 1rem;
 }
 

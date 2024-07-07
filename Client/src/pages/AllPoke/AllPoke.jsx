@@ -224,7 +224,7 @@ const AllPoke = () => {
                 <p className="pokecard-details">DETAILS</p>
               </Link>
               <Link to="/gameplay">
-                <p className="pokecard-fight">FIGHT</p>
+                <p className="pokecard-fgt">FIGHT</p>
               </Link>
             </div>
           </motion.div>
@@ -279,6 +279,9 @@ const AllPoke = () => {
                 <p className="pokecard-type text-black font-bold">
                   Type: {pokemon.types.map((type) => type.type.name).join(", ")}
                 </p>
+                {/* <p className=" text-black line-clamp-2 py-6 pl-6 pr-6 text-sm">
+                  {pokemonData.description}
+                </p> */}
                 <p className=" text-black line-clamp-2 py-6 pl-6 pr-6 text-sm">
                   {pokemon.description}
                 </p>
@@ -288,7 +291,7 @@ const AllPoke = () => {
                   <p className="pokecard-details">DETAILS</p>
                 </Link>
                 <Link to="/gameplay">
-                  <p className="pokecard-fight">FIGHT</p>
+                  <p className="pokecard-fgt">FIGHT</p>
                 </Link>
               </div>
             </motion.div>
