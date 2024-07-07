@@ -132,6 +132,11 @@ const AllPoke = () => {
     fetchPokemonDetails();
   }, []);
 
+  const handleFightClick = () => {
+    console.log("clicking to fight page");
+    navigate("/gameplay", { state: { selectedPokemon: pokemonData } });
+  };
+
   return (
     <motion.div
       variants={homeContainerVarient}
@@ -223,9 +228,9 @@ const AllPoke = () => {
               <Link to={`/allpokes/${pokemonData.id}`}>
                 <p className="pokecard-details">DETAILS</p>
               </Link>
-              <Link to="/gameplay">
-                <p className="pokecard-fgt">FIGHT</p>
-              </Link>
+              <button className="pokecard-fgt" onClick={handleFightClick}>
+                FIGHT
+              </button>
             </div>
           </motion.div>
         </motion.div>
@@ -290,9 +295,9 @@ const AllPoke = () => {
                 <Link to={`/allpokes/${pokemon.id}`}>
                   <p className="pokecard-details">DETAILS</p>
                 </Link>
-                <Link to="/gameplay">
-                  <p className="pokecard-fgt">FIGHT</p>
-                </Link>
+                <button className="pokecard-fgt" onClick={handleFightClick}>
+                  FIGHT
+                </button>
               </div>
             </motion.div>
           </li>
