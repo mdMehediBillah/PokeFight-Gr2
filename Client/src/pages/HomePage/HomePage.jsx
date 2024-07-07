@@ -108,7 +108,7 @@ const HomePage = () => {
       }}
     >
       <div>
-        <div className="flex container justify-between mx-auto py-4">
+        <div className="flex container justify-between mx-auto px-8 py-4">
           <UserProfile />
           <Link to="/allPokes">
             <motion.h2
@@ -133,7 +133,7 @@ const HomePage = () => {
           variants={userNameVarient}
           initial="hidde"
           animate="visible"
-          className="text-black py-1 font-semibold text-black px-3 text-center uppercase"
+          className="text-black py-1 font-semibold text-black px-4 text-center uppercase"
         >
           Welcome, {userName}
         </motion.h3>
@@ -150,7 +150,7 @@ const HomePage = () => {
           initial={{ y: 800, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ type: "tween", duration: 0.5, delay: 1.5 }}
-          className="container grid sm:grid-cols-1  md:grid-cols-2 justify-center lg:grid-cols-3  xl:grid-cols-4 mx-auto gap-4"
+          className="container grid sm:grid-cols-1 md:grid-cols-2 justify-center lg:grid-cols-3 xl:grid-cols-4 mx-auto gap-4"
         >
           <div className="mb-8">
             <PokeCard />

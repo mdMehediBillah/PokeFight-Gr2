@@ -78,7 +78,7 @@ const PokeCard = () => {
     return <div>Loading...</div>;
   }
 
-  const { name, order, image, description, stats, types } = pokemonData;
+  const { name, order, image, image2, description, stats, types } = pokemonData;
 
   const handleFightClick = () => {
     navigate("/gameplay", { state: { selectedPokemon: pokemonData } });
@@ -118,14 +118,14 @@ const PokeCard = () => {
         <p className="pokecard-type text-black font-bold">
           Type: {types.map((type) => type.type.name).join(", ")}
         </p>
-        <p className=" text-black line-clamp-2 py-6 pl-4 text-sm">
+        <p className=" text-black line-clamp-2 py-6 px-4 text-sm">
           {description}
         </p>
         <div className="pokecard-buttons">
           <Link to={`/allpokes/${pokemonData.id}`}>
             <p className="pokecard-details">DETAILS</p>
           </Link>
-          <button className="pokecard-fight" onClick={handleFightClick}>
+          <button className="pokecard-fgt" onClick={handleFightClick}>
             FIGHT
           </button>
         </div>

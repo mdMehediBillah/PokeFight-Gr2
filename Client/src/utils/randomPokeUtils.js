@@ -31,6 +31,7 @@ export const fetchRandomPokemon = async () => {
     weight: pokemonData.weight,
     species: pokemonData.species.url,
     image: pokemonData.sprites.other["official-artwork"].front_default,
+    image2: pokemonData.sprites.other["showdown"].front_default,
     types: pokemonData.types,
     description: description,
   };
