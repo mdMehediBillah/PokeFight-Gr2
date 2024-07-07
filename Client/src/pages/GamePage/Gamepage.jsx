@@ -17,6 +17,8 @@ const Gamepage = () => {
   const [randomPokemon, setRandomPokemon] = useState(null);
   const [winner, setWinner] = useState(null);
   const [showResult, setShowResult] = useState(false);
+  const [userScore, setUserScore] = useState(0);
+  const [computerScore, setComputerScore] = useState(0);
   // const [openModal, setOpenModal] = useState(false);
   const [showModal, setShowModal] = useState(null);
 
@@ -48,8 +50,10 @@ const Gamepage = () => {
 
     if (selectedTotal > randomTotal) {
       setWinner(selectedPokemon.name);
+      setUserScore((prevScore) => prevScore + 1);
     } else if (selectedTotal < randomTotal) {
       setWinner(randomPokemon.name);
+      setComputerScore((prevScore) => prevScore + 1);
     } else {
       setWinner("It's a tie!");
     }
@@ -115,12 +119,18 @@ const Gamepage = () => {
         <SuccessModal
           closeModal={setShowModal}
           selectedPokemon={selectedPokemon}
+          randomPokemon={randomPokemon}
+          userScore={setUserScore}
+          computerScore={setComputerScore}
         />
       )}
       {showModal === "fail" && (
         <LoseModal
           closeModal={setShowModal}
           selectedPokemon={selectedPokemon}
+          randomPokemon={randomPokemon}
+          userScore={setUserScore}
+          computerScore={setComputerScore}
         />
       )}
 
@@ -256,6 +266,8 @@ const Gamepage = () => {
           FIGHT
         </button>
       </div>
+      <h2>UserScore:{userScore} </h2>
+      <h2>ComputerScore:{computerScore} </h2>
 
       {showResult && (
         <div className="result text-center text-white px-4 py-2 mt-4">
