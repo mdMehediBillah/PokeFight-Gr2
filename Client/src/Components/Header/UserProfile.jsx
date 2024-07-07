@@ -20,6 +20,7 @@ const UserProfile = () => {
       localStorage.removeItem("token");
       localStorage.removeItem("email");
       localStorage.removeItem("userName");
+      localStorage.removeItem("userid");
       toast.success("Logout successfully!");
       navigate("/login");
     } catch (error) {

@@ -10,6 +10,8 @@ import { fetchRandomPokemon } from "../../utils/randomPokeUtils";
 import SuccessModal from "../../Components/SuccessModal";
 import LoseModal from "../../Components/LoseModal";
 import { toast } from "react-toastify";
+import { FaArrowLeft } from "react-icons/fa";
+import { MdOutlineLeaderboard } from "react-icons/md";
 
 const Gamepage = () => {
   const location = useLocation();
@@ -17,6 +19,8 @@ const Gamepage = () => {
   const [randomPokemon, setRandomPokemon] = useState(null);
   const [winner, setWinner] = useState(null);
   const [showResult, setShowResult] = useState(false);
+  const [userScore, setUserScore] = useState(0);
+  const [computerScore, setComputerScore] = useState(0);
   // const [openModal, setOpenModal] = useState(false);
   const [showModal, setShowModal] = useState(null);
 
@@ -48,8 +52,12 @@ const Gamepage = () => {
 
     if (selectedTotal > randomTotal) {
       setWinner(selectedPokemon.name);
+      setUserScore((prevScore) => prevScore + 1);
+      localStorage.setItem("userScore", JSON.stringify(userScore));
     } else if (selectedTotal < randomTotal) {
       setWinner(randomPokemon.name);
+      setComputerScore((prevScore) => prevScore + 1);
+      localStorage.setItem("computerScore", JSON.stringify(computerScore));
     } else {
       setWinner("It's a tie!");
     }
@@ -82,18 +90,13 @@ const Gamepage = () => {
     return <div>Loading...</div>;
   }
 
-  // const handleResult = () => {
-  //   setShowResult(true);
-  //   setOpenModal(true);
-  // };
-  // Modal dialog experiment
-
   const winnerPokemon = winner;
   const userSelectPokemon = selectedPokemon.name;
   console.log(winnerPokemon);
   console.log(userSelectPokemon);
 
   const handleCheckWinner = () => {
+    determineWinner();
     if (winnerPokemon === userSelectPokemon) {
       setShowModal("success");
       setShowResult(true);
@@ -103,6 +106,9 @@ const Gamepage = () => {
     }
   };
 
+  const userScoreLocal = localStorage.getItem("userScore");
+  const computerScoreLocal = localStorage.getItem("computerScore");
+
   return (
     <div
       className=" homeBg min-h-screen bg-cover bg-center bg-no-repeat w-[100%]"
@@ -110,22 +116,64 @@ const Gamepage = () => {
         backgroundImage: `url(${imgUrl})`,
       }}
     >
-      <img
-        src={PokeFight}
-        alt="Pokefight logo"
-        className="w-[400px] justify-center"
-      />
+      <Link to={"/home"}>
+        <motion.div
+          initial={{ y: 200, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ type: "spring", duration: 0.3, delay: 1.3 }}
+          className="mt-6"
+        >
+          <img
+            src={PokeFight}
+            alt="Pokefight logo"
+            className="w-[400px] justify-center"
+          />
+        </motion.div>
+        {/* modal */}
+      </Link>
+      {showModal === "success" && (
+        <SuccessModal
+          closeModal={setShowModal}
+          selectedPokemon={selectedPokemon}
+          randomPokemon={randomPokemon}
+          userScore={setUserScore}
+          computerScore={setComputerScore}
+        />
+      )}
+      {showModal === "fail" && (
+        <LoseModal
+          closeModal={setShowModal}
+          selectedPokemon={selectedPokemon}
+          randomPokemon={randomPokemon}
+          userScore={setUserScore}
+          computerScore={setComputerScore}
+        />
+      )}
 
-      <div className="flex gap-4 w-72 bg-cyan-50 justify-center mx-auto font-semibold mt-2">
-        <Link to="/home">
-          <p>Change Pokemon</p>
-        </Link>
-        {/* <p>Fight</p> */}
-      </div>
-      <div className="flex gap-4 w-72 bg-cyan-50 justify-center mx-auto font-semibold mt-2 mb-6">
-        <Link to="/score">
-          <p>Scores</p>
-        </Link>
+      <div className="flex container justify-around mb-20">
+        <motion.div
+          initial={{ x: -200, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ type: "spring", duration: 0.3, delay: 2.5 }}
+          className="bg-yellow-200 py-2 px-4 text-black font-semibold rounded hover:bg-yellow-400"
+        >
+          <Link to="/allPokes" className="flex items-center gap-2">
+            <FaArrowLeft />
+            <p>Change Pokemon</p>
+          </Link>
+          {/* <p>Fight</p> */}
+        </motion.div>
+        <motion.div
+          initial={{ x: 200, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ type: "spring", duration: 0.3, delay: 2.2 }}
+          className="bg-yellow-200 py-2 px-4 text-black font-semibold rounded hover:bg-yellow-400"
+        >
+          <Link to="/score" className="flex items-center gap-2">
+            <MdOutlineLeaderboard />
+            <p>Scores</p>
+          </Link>
+        </motion.div>
       </div>
 
       <div className="fight-container flex flex-row items-center">
@@ -174,18 +222,6 @@ const Gamepage = () => {
             <p className="text-black px-4 py-6 text-sm">
               {selectedPokemon.description}
             </p>
-            {/* <div className="pokecard-buttons">
-              <Link to={`/home`}>
-                <p className="pokecard-details">BACK</p>
-              </Link>
-
-              <p
-                onClick={() => window.location.reload()}
-                className="pokecard-fgt"
-              >
-                FIGHT AGAIN
-              </p>
-            </div> */}
           </div>
         </motion.div>
         <motion.div
@@ -247,22 +283,35 @@ const Gamepage = () => {
           </div>
         </motion.div>
       </div>
-      <div className="fight-button-container text-center mt-4">
+      <motion.div
+        initial={{ y: -200, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ type: "spring", duration: 0.3, delay: 2.6 }}
+        className="fight-button-container text-center mt-4 flex gap-10 items-center mx-auto"
+      >
+        <h2 className=" w-[200px] bg-cyan-800 py-1 px-4 text-white rounded mr-4">
+          User score: {userScoreLocal}{" "}
+        </h2>
         <button
-          className="fight-button bg-blue-500 text-white px-4 py-2 rounded"
+          className=" pokecard-fgt"
           onClick={handleCheckWinner}
           // onClick={() => setShowResult(true)}
         >
           FIGHT
         </button>
-      </div>
+        <h2 className="w-[200px] bg-cyan-800 py-1 px-4 text-white rounded ml-4">
+          Computer score: {computerScoreLocal}{" "}
+        </h2>
+      </motion.div>
 
       {showResult && (
-        <div className="result text-center text-white px-4 py-2 mt-4">
-          <h2>{winner ? `${winner} wins!` : "It's a tie!"}</h2>
+        <div className=" text-center text-white px-4 py-2 mt-6">
+          <h2 className="text-red bg-rose-600 font-bold text-2xl py-2 px-6 rounded-xl">
+            {winner ? `The winner is ${winner}!` : "It's a tie!"}
+          </h2>
 
           <button
-            className="save-button bg-green-500 text-white px-4 py-2 rounded mt-4"
+            className="save-button bg-cyan-500 text-white px-4 py-2 rounded mt-2 "
             onClick={saveResult}
           >
             Save Result

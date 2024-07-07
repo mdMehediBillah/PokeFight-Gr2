@@ -33,6 +33,7 @@ const Login = () => {
       localStorage.setItem("token", data.token);
       localStorage.setItem("email", data.email);
       localStorage.setItem("userName", data.userName);
+      localStorage.setItem("userId", data.userId);
       handleReset();
       navigate("/home");
     } catch (error) {

@@ -106,7 +106,8 @@ const PokeCard = () => {
               className="pokecard-background_img"
             />
           </div>
-          <img className="pokecard-image" src={image} alt={name} />
+          <img className="pokecard-image h-[80%]" src={image} alt={name} />
+          {/* <img className="pokecard-image" src={image} alt={name} /> */}
           <p className="pokecard-order">{order}</p>
           <div className="pokecard-stats">
             <span className="pokecard-attack">Attack: {stats.attack}</span>

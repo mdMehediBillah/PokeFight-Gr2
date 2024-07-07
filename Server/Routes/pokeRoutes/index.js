@@ -24,7 +24,7 @@ userRouter.get(
   [param("id").isInt({ min: 1 }).withMessage("id is not valid")],
   getOne
 );
-userRouter.put("/:id", updateOne);
-userRouter.delete("/:id", deletOne);
+userRouter.put("/:id", isAuthenticated, updateOne);
+userRouter.delete("/:id", isAuthenticated, deletOne);
 
 export default userRouter;
