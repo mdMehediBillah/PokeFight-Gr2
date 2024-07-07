@@ -2,9 +2,9 @@ import "./AllPoke.css";
 import { useState, useEffect } from "react";
 import "../HomePage/HomePage.css";
 import imgUrl from "../../images/homeBg.jpg";
-import pokeFight from "../../assets/pokeFight.png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import electric from "../../assets/images/pokecard/electric.svg";
 // import axios from "axios";
 // import UserProfile from "../../Components/Header/UserProfile";
 
@@ -12,7 +12,7 @@ import { motion } from "framer-motion";
 import Header from "../../Components/Header.jsx";
 
 const AllPoke = () => {
-  // const [pokemonData, setPokemonData] = useState(null);
+  const [pokemonData, setPokemonData] = useState(null);
   const navigate = useNavigate();
   const [searched, setSearched] = useState(false);
   // const userName = localStorage.getItem("userName");
@@ -53,7 +53,7 @@ const AllPoke = () => {
 
   const [searchInput, setSearchInput] = useState("");
   const [searchResult, setSearchResult] = useState(null);
-  const [description, setDescription] = useState("non defined");
+  // const [descript, setDescription] = useState("non defined");
   const [details, setDetails] = useState([]);
 
   const handleSearch = async () => {
@@ -61,25 +61,52 @@ const AllPoke = () => {
     const response = await fetch(
       `https://pokeapi.co/api/v2/pokemon/${searchInput.toLowerCase()}`
     );
-    console.log("response : ", response);
     const description = await fetch(
       `https://pokeapi.co/api/v2/pokemon-species/${searchInput.toLowerCase()}`
     );
-    console.log("description : ", description);
     setSearched(true);
 
     if (response.ok && description.ok) {
       const data = await response.json();
       const des = await description.json();
-
+      const dest = des.flavor_text_entries.find(
+        (entry) => entry.language.name === "en"
+      ).flavor_text;
+      console.log(dest);
+      
       setSearchResult(data);
-      setDescription(des);
+      setDescription(dest);
+
+      console.log(description);
+
+      const formattedPokemon = {
+        id: data.id,
+        name: data.name,
+        order: data.order,
+        stats: {
+          hp: data.stats.find((stat) => stat.stat.name === "hp")
+            .base_stat,
+          attack: data.stats.find(
+            (stat) => stat.stat.name === "attack"
+          ).base_stat,
+          defense: data.stats.find(
+            (stat) => stat.stat.name === "defense"
+          ).base_stat,
+        },
+        abilities: data.abilities,
+        species: data.species.url,
+        image: data.sprites.other["official-artwork"].front_default,
+        types: data.types,
+        description: dest,
+      };
+
+      setPokemonData(formattedPokemon);
     } else {
       setSearchResult(null);
-      console.log("y");
     }
   };
 
+console.log(pokemonData);
   useEffect(() => {
     const fetchPokemonDetails = async () => {
       try {
@@ -98,7 +125,8 @@ const AllPoke = () => {
         );
         const pokemonDetails = await Promise.all(pokemonDetailsPromises);
         setDetails(pokemonDetails);
-
+        console.log(pokemonDetails);
+  
         // Log the details
       } catch (error) {
         console.error("Error fetching Pokémon details:", error);
@@ -114,103 +142,136 @@ const AllPoke = () => {
       animate="visible"
       exit="exit"
       className="main homeBg min-h-screen bg-cover bg-center bg-no-repeat w-[100%]"
-      style={{ backgroundImage: `url(${imgUrl})` }}
-    >
-      {" "}
-      <motion.h1
-        variants={titleContainerVarient}
-        initial="hidden"
-        animate="visible"
-        className="text-center pt-8 text-4xl font-semibold"
-      >
-        {<Header />}
-      </motion.h1>
-      style={{ backgroundImage: `url(${imgUrl})` }}
-      <motion.h1
-        variants={titleContainerVarient}
-        initial="hidden"
-        animate="visible"
-        className="text-center pt-8 text-4xl font-semibold"
-      >
-        <img src={pokeFight} alt="pokefight icon" className="w-72" />{" "}
-      </motion.h1>
-      <UserProfile />
-      <div className="pokecard">
-        <div className="pokecard-header">
-          <h2 className="pokecard-title">{name}</h2>
-
-          <span className="pokecard-hp">HP: {stats.hp}</span>
-        </div>
-        <Link to={`/allpokes/${pokemonData.id}`}>
-          <div className="pokecard-img-container">
-            <div className="pokecard-background">
-              <img
-                src={electric}
-                alt="Pokecard background"
-                className="pokecard-background_img"
-              />
-            </div>
-            <img className="pokecard-image" src={image} alt={name} />
-            <p className="pokecard-order">{order}</p>
-            <div className="pokecard-stats">
-              <span className="pokecard-attack">Attack: {stats.attack}</span>
-              <span className="pokecard-defense">Defense: {stats.defense}</span>
-            </div>
-          </div>
-        </Link>
-        <div className="pokecard-body">
-          <p className="pokecard-type">
-            Type: {types.map((type) => type.type.name).join(", ")}
-          </p>
-          <p className="pokecard-description">{description}</p>
-          <div className="pokecard-buttons">
-            <Link to={`/allpokes/${pokemonData.id}`}>
-              <p className="pokecard-details">DETAILS</p>
-            </Link>
-            <Link to="/gameplay">
-              <p className="pokecard-fight">FIGHT</p>
-            </Link>
-          </div>
-        </div>
-      </div>
+      style={{ backgroundImage: `url(${imgUrl})`,}}>
+    {" "}
+     <motion.h1
+        variants={titleContainerVarient} initial="hidden" animate="visible"
+        className="text-center pt-8 mt-5 text-4xl font-semibold">
+        {<Header />}</motion.h1>
+      {/* <UserProfile /> */}
+    
       <section className="mt-5">
         <div className="flex">
-          <input
-            className="hero__glow-cta mr-5"
-            type="text"
-            placeholder="Enter Pokemon name"
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
-          />
-          <button className="hero__glow-cta" onClick={handleSearch}>
-            Search
-          </button>
+        <input className="hero__glow-cta mr-5" type="text" placeholder="Enter Pokemon name" value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}/>
+        <button className="hero__glow-cta" onClick={handleSearch}>
+          Search
+        </button>
         </div>
-        {searched && !searchResult && <h2>not found</h2>}
-        {searchResult && (
-          <div>
-            <h2>name : {searchResult.name} </h2>
-            <p>descripiton: {description.base_happiness}</p>
-            <p>Height: {searchResult.height}</p>
-            <p>Weight: {searchResult.weight}</p>
+        </section>
+        {searched && !searchResult && (<h2>not found</h2>)}
+          {searchResult && (
+              <motion.div
+          initial={{ y: 800, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ type: "tween", duration: 0.5}}
+          className="container flex justify-center"
+        >
+              <motion.div whileHover={{ scale: 1.04 }}
+                transition={{ type: "spring", duration: 0.2, bounce: true }} className="pokecard w-[25%] mt-10">
+              <div className="pokecard-header ">
+                <h2 className="pokecard-title">{pokemonData.name}</h2>
+
+        <span className="pokecard-hp text-black font-semibold">
+          HP: {pokemonData.stats.hp}
+        </span>
+      </div>
+      <Link to={`/allpokes/${pokemonData.id}`}>
+        <div className="pokecard-img-container">
+          <div className="pokecard-background">
             <img
-              src={searchResult.sprites.front_default}
-              alt={searchResult.name}
+              src={electric}
+              alt="Pokecard background"
+              className="pokecard-background_img"
             />
           </div>
-        )}
-      </section>
-      <ul>
+          <img className="pokecard-image" src={pokemonData.image} alt={pokemonData.name} />
+          <p className="pokecard-order">{pokemonData.order}</p>
+          <div className="pokecard-stats">
+            <span className="pokecard-attack">Attack: {pokemonData.stats.attack}</span>
+            <span className="pokecard-defense">Defense: {pokemonData.stats.defense}</span>
+          </div>
+        </div>
+      </Link>
+      <div className="pokecard-body">
+        <p className="pokecard-type text-black font-bold">
+          Type: {pokemonData.types.map((type) => type.type.name).join(", ")}
+        </p>
+        <p className=" text-black line-clamp-2 py-6 pl-6 pr-6 text-sm">
+          {pokemonData.description}
+        </p>
+      </div>
+      <div className="pokecard-buttons">
+          <Link to={`/allpokes/${pokemonData.id}`}>
+            <p className="pokecard-details">DETAILS</p>
+          </Link>
+          <Link to="/gameplay">
+            <p className="pokecard-fight">FIGHT</p>
+          </Link>
+        </div>
+    </motion.div>
+    </motion.div>
+          )
+          }
+      
+      <motion.div
+          initial={{ y: 800, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ type: "tween", duration: 0.5, delay: 1.5 }}
+          className="container grid sm:grid-cols-1  md:grid-cols-2 justify-center lg:grid-cols-3  xl:grid-cols-4 mx-auto gap-4"
+        >
+      
         {details.map((pokemon) => (
           <li key={pokemon.id}>
-            <img src={pokemon.sprites.front_default} alt={pokemon.name} />
-            {pokemon.name} - {pokemon.stats[0].stat.name}:{" "}
-            {pokemon.stats[0].base_stat}
-            {pokemon.stats[1].stat.name}: {pokemon.stats[1].base_stat}
-            {pokemon.stats[2].stat.name}: {pokemon.stats[2].base_stat}
+             
+              <motion.div whileHover={{ scale: 1.04 }}
+                transition={{ type: "spring", duration: 0.2, bounce: true }} className="pokecard mt-10">
+              <div className="pokecard-header ">
+                <h2 className="pokecard-title">{pokemon.name}</h2>
+
+        <span className="pokecard-hp text-black font-semibold">
+          HP: {pokemon.stats[1].base_stat}
+        </span>
+      </div>
+      <Link to={`/allpokes/${pokemon.id}`}>
+        <div className="pokecard-img-container">
+          <div className="pokecard-background">
+            <img
+              src={electric}
+              alt="Pokecard background"
+              className="pokecard-background_img"
+            />
+          </div>
+          <img className="pokecard-image" src={pokemon.sprites.front_default} alt={pokemon.name} />
+          <p className="pokecard-order">{pokemon.order}</p>
+          <div className="pokecard-stats">
+            <span className="pokecard-attack">Attack: {pokemon.stats[1].base_stat}</span>
+            <span className="pokecard-defense">Defense: {pokemon.stats[2].base_stat}</span>
+          </div>
+        </div>
+      </Link>
+      <div className="pokecard-body">
+        <p className="pokecard-type text-black font-bold">
+          Type: {pokemon.types.map((type) => type.type.name).join(", ")}
+        </p>
+        <p className=" text-black line-clamp-2 py-6 pl-6 pr-6 text-sm">
+          {pokemon.description}
+        </p>
+      </div>
+      <div className="pokecard-buttons">
+          <Link to={`/allpokes/${pokemon.id}`}>
+            <p className="pokecard-details">DETAILS</p>
+          </Link>
+          <Link to="/gameplay">
+            <p className="pokecard-fight">FIGHT</p>
+          </Link>
+        </div>
+    </motion.div>
+    
           </li>
         ))}
-      </ul>
+      
+      </motion.div>
     </motion.div>
   );
 };
