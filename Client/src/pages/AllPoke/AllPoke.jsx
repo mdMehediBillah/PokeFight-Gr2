@@ -10,6 +10,8 @@ import electric from "../../assets/images/pokecard/electric.svg";
 // import UserProfile from "../../Components/Header/UserProfile";
 // import PokeCard from "../../components/PokeCard.jsx";
 import Header from "../../Components/Header.jsx";
+import Footer from "../../Components/Footer.jsx";
+import UserProfile from "../../Components/Header/UserProfile.jsx";
 const AllPoke = () => {
   const [pokemonData, setPokemonData] = useState(null);
   const navigate = useNavigate();
@@ -169,6 +171,22 @@ const AllPoke = () => {
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
+
+  const showAllVarient = {
+    hidde: {
+      opacity: 0,
+      x: -50,
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        type: "spring",
+        delay: 1.2,
+        duration: 0.5,
+      },
+    },
+  };
   return (
     <motion.div
       variants={homeContainerVarient}
@@ -178,11 +196,24 @@ const AllPoke = () => {
       className="main homeBg min-h-screen bg-cover bg-center bg-no-repeat w-[100%]"
       style={{ backgroundImage: `url(${imgUrl})` }}
     >
+      <div className="flex container justify-between mx-auto px-8 py-4">
+        <UserProfile />
+        <Link to="/home">
+          <motion.h2
+            variants={showAllVarient}
+            initial="hidde"
+            animate="visible"
+            className="home-pokedex-btn"
+          >
+            Home
+          </motion.h2>{" "}
+        </Link>
+      </div>
       <motion.h1
         variants={titleContainerVarient}
         initial="hidden"
         animate="visible"
-        className="text-center pt-8 mt-5 text-4xl font-semibold"
+        className="text-center text-4xl font-semibold"
       >
         <Header />
       </motion.h1>
@@ -202,7 +233,7 @@ const AllPoke = () => {
               onChange={(e) => setSearchInput(e.target.value)}
             />
             <button
-              className="bg-rose-800 px-4 py-2 rounded-lg ml-1 text-white"
+              className="bg-rose-700 px-4 py-2 rounded-lg ml-1 text-white"
               // onClick={handleSearch}
             >
               Search
@@ -308,7 +339,7 @@ const AllPoke = () => {
                     />
                   </div>
                   <img
-                    className="pokecard-image"
+                    className="pokecard-image h-[60%]"
                     src={pokemon.sprites.other["showdown"].front_default}
                     alt={pokemon.name}
                   />
@@ -362,6 +393,7 @@ const AllPoke = () => {
           </button>
         ))}
       </div>
+      <Footer />
     </motion.div>
   );
 };

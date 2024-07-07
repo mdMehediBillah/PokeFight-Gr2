@@ -12,6 +12,8 @@ import LoseModal from "../../Components/LoseModal";
 import { toast } from "react-toastify";
 import { FaArrowLeft } from "react-icons/fa";
 import { MdOutlineLeaderboard } from "react-icons/md";
+import Footer from "../../Components/Footer";
+import UserProfile from "../../Components/Header/UserProfile";
 
 const Gamepage = () => {
   const location = useLocation();
@@ -109,6 +111,22 @@ const Gamepage = () => {
   const userScoreLocal = localStorage.getItem("userScore");
   const computerScoreLocal = localStorage.getItem("computerScore");
 
+  const showAllVarient = {
+    hidde: {
+      opacity: 0,
+      x: -50,
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        type: "spring",
+        delay: 1.2,
+        duration: 0.5,
+      },
+    },
+  };
+
   return (
     <div
       className=" homeBg min-h-screen bg-cover bg-center bg-no-repeat w-[100%]"
@@ -116,17 +134,30 @@ const Gamepage = () => {
         backgroundImage: `url(${imgUrl})`,
       }}
     >
+      <div className="flex container justify-between mx-auto px-8 py-4">
+        <UserProfile />
+        <Link to="/home">
+          <motion.h2
+            variants={showAllVarient}
+            initial="hidde"
+            animate="visible"
+            className="home-pokedex-btn"
+          >
+            Home
+          </motion.h2>{" "}
+        </Link>
+      </div>
       <Link to={"/home"}>
         <motion.div
           initial={{ y: 200, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ type: "spring", duration: 0.3, delay: 1.3 }}
-          className="mt-6"
+          className=""
         >
           <img
             src={PokeFight}
             alt="Pokefight logo"
-            className="w-[400px] justify-center"
+            className="w-[350px] justify-center"
           />
         </motion.div>
         {/* modal */}
@@ -150,12 +181,12 @@ const Gamepage = () => {
         />
       )}
 
-      <div className="flex container justify-around mb-20">
+      <div className="flex container justify-center mb-20 gap-4">
         <motion.div
           initial={{ x: -200, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
-          transition={{ type: "spring", duration: 0.3, delay: 2.5 }}
-          className="bg-yellow-200 py-2 px-4 text-black font-semibold rounded hover:bg-yellow-400"
+          transition={{ type: "spring", duration: 0.3, delay: 1 }}
+          className="bg-cyan-200 py-2 px-4 text-black font-semibold rounded hover:bg-yellow-400"
         >
           <Link to="/allPokes" className="flex items-center gap-2">
             <FaArrowLeft />
@@ -166,12 +197,12 @@ const Gamepage = () => {
         <motion.div
           initial={{ x: 200, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
-          transition={{ type: "spring", duration: 0.3, delay: 2.2 }}
-          className="bg-yellow-200 py-2 px-4 text-black font-semibold rounded hover:bg-yellow-400"
+          transition={{ type: "spring", duration: 0.3, delay: 1.5 }}
+          className="bg-cyan-200 py-2 px-4 text-black font-semibold rounded hover:bg-yellow-400"
         >
           <Link to="/score" className="flex items-center gap-2">
             <MdOutlineLeaderboard />
-            <p>Scores</p>
+            <p>Players Statistics</p>
           </Link>
         </motion.div>
       </div>
@@ -181,7 +212,7 @@ const Gamepage = () => {
         <motion.div
           initial={{ y: 200, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ type: "tween", duration: 0.5, delay: 1.5 }}
+          transition={{ type: "tween", duration: 0.5, delay: 0.8 }}
           className="pokecard"
         >
           <div className="pokecard-header">
@@ -231,7 +262,7 @@ const Gamepage = () => {
             type: "spring",
             bounce: 100,
             duration: 0.2,
-            delay: 0.8,
+            delay: 0.2,
           }}
         >
           <img src={vs} alt="VS" className="w-[150px] px-4" />
@@ -239,7 +270,7 @@ const Gamepage = () => {
         <motion.div
           initial={{ y: -200, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ type: "tween", duration: 0.5, delay: 1.5 }}
+          transition={{ type: "tween", duration: 0.5, delay: 0.5 }}
           className="pokecard"
         >
           <div className="pokecard-header">
@@ -286,7 +317,7 @@ const Gamepage = () => {
       <motion.div
         initial={{ y: -200, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ type: "spring", duration: 0.3, delay: 2.6 }}
+        transition={{ type: "spring", duration: 0.3, delay: 1.2 }}
         className="fight-button-container text-center mt-4 flex gap-10 items-center mx-auto"
       >
         <h2 className=" w-[200px] bg-cyan-800 py-1 px-4 text-white rounded mr-4">
@@ -311,13 +342,16 @@ const Gamepage = () => {
           </h2>
 
           <button
-            className="save-button bg-cyan-500 text-white px-4 py-2 rounded mt-2 "
+            className="save-button bg-cyan-500 text-white px-4 py-2 rounded mt-2 mb-10"
             onClick={saveResult}
           >
             Save Result
           </button>
         </div>
       )}
+      <div className="my-auto pt-20">
+        <Footer />
+      </div>
     </div>
   );
 };

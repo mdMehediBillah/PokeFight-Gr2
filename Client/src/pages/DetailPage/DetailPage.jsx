@@ -8,6 +8,8 @@ import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import "./DetailPage.css";
 import Header from "../../Components/Header";
+import Footer from "../../Components/Footer";
+import UserProfile from "../../Components/Header/UserProfile";
 
 const DetailPage = () => {
   const { id } = useParams();
@@ -25,6 +27,8 @@ const DetailPage = () => {
           `https://pokeapi.co/api/v2/pokemon-species/${id}`
         );
         const speciesData = speciesResponse.data;
+        console.log(pokemonDetails.sprites.other["showdown"].front_default);
+
         const description = speciesData.flavor_text_entries.find(
           (entry) => entry.language.name === "en"
         ).flavor_text;
@@ -48,10 +52,10 @@ const DetailPage = () => {
           weight: pokemonDetails.weight,
           species: pokemonDetails.species.url,
           image: pokemonDetails.sprites.other["official-artwork"].front_default,
+          image2: pokemonDetails.sprites.other["showdown"].front_default,
           types: pokemonDetails.types,
           description: description,
         };
-
         setPokemonDetails(formattedPokemon);
       } catch (error) {
         console.error("Error fetching pokemon details:", error);
@@ -73,10 +77,27 @@ const DetailPage = () => {
     order,
     types,
     image,
+    image2,
     abilities,
     stats,
     sprites,
   } = pokemonDetails;
+
+  const showAllVarient = {
+    hidde: {
+      opacity: 0,
+      x: -50,
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        type: "spring",
+        delay: 1.2,
+        duration: 0.5,
+      },
+    },
+  };
 
   return (
     <>
@@ -86,11 +107,25 @@ const DetailPage = () => {
           backgroundImage: `url(${imgUrl})`,
         }}
       >
+        <div className="flex container justify-between mx-auto px-8 py-4">
+          <UserProfile />
+          <Link to="/home">
+            <motion.h2
+              variants={showAllVarient}
+              initial="hidde"
+              animate="visible"
+              className="home-pokedex-btn"
+            >
+              Home
+            </motion.h2>{" "}
+          </Link>
+        </div>
+
         <motion.div
           initial={{ y: -200, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ type: "spring", duration: 0.6, delay: 0.2 }}
-          className="mt-12"
+          className=""
         >
           <Header />
         </motion.div>
@@ -98,7 +133,7 @@ const DetailPage = () => {
           initial={{ x: -200, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ type: "spring", duration: 0.6, delay: 0.6 }}
-          className="text-black text-2xl"
+          className="text-black text-2xl mb-2"
         >
           Details about Pokemon
         </motion.h1>
@@ -122,7 +157,7 @@ const DetailPage = () => {
                 />
               </div>
               <div>
-                <img className="detail-image" src={image} alt={name} />
+                <img className="detail-image h-[60%]" src={image2} alt={name} />
                 <p className="detail-order">{order}</p>
                 <div className="detail-stats">
                   <p>Attack: {stats.attack}</p>
@@ -161,6 +196,7 @@ const DetailPage = () => {
             </Link>
           </div>
         </motion.div>
+        <Footer />
       </div>
     </>
   );

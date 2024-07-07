@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { URL } from "../../utils/myLocalURL.js";
 import { motion } from "framer-motion";
+import { MdOutlineLeaderboard } from "react-icons/md";
 
 import axios from "axios";
 
@@ -42,6 +43,9 @@ const UserProfile = () => {
       },
     },
   };
+  const handleScore = () => {
+    navigate("/score");
+  };
   return (
     <>
       <motion.div
@@ -60,9 +64,16 @@ const UserProfile = () => {
         </div>
         <ul
           tabIndex={0}
-          className="dropdown-content menu bg-red-600 z-[1] shadow text-white rounded font-semibold mt-1"
+          className="dropdown-content menu bg-gray-900 z-[1] shadow text-white rounded font-semibold mt-1"
         >
-          <li onClick={handleLogout}>
+          <li onClick={handleScore} className="bg-cyan-800 px-4 rounded">
+            <span>
+              {" "}
+              <MdOutlineLeaderboard />
+              Statistics
+            </span>
+          </li>
+          <li onClick={handleLogout} className="bg-rose-600 px-4 mt-1 rounded">
             <span>
               {" "}
               <GrLogout />
