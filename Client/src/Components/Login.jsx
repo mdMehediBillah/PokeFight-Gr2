@@ -1,3 +1,4 @@
+
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import backgroundImage from "../assets/signUpBg.jpg";
@@ -9,7 +10,6 @@ import logoURL from "../assets/pokeFight.png";
 
 const Login = () => {
   const navigate = useNavigate();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
