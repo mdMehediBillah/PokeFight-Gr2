@@ -9,7 +9,7 @@ export const login = async (req, res) => {
     // console.log(user);
     const userName = user.first_name;
     const userId = user._id;
-    if (user && bcrypt.compareSync(password, user.password)) {
+    if (user && bcrypt.compareSync(password.toString(), user.password)) {
       const token = generateToken(user);
       res.json({
         userId,
