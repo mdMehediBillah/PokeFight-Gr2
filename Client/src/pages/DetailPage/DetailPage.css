@@ -1,0 +1,229 @@
+.homeBg {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: #056c8b;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0px 0px 5px #000000d2;
+}
+
+.detail-card {
+  background: linear-gradient(rgb(223, 90, 1), rgb(248, 229, 142)) padding-box,
+    linear-gradient(to right, darkblue, rgb(158, 19, 228)) border-box;
+  border: 10px solid transparent;
+  border-radius: 20px;
+  box-shadow: 5px 5px 20px #000000;
+  min-width: 350px !important;
+  width: 600px;
+  height: 600px;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  background-color: #f9f9f9;
+  margin-top: 20px;
+}
+
+.detail-header {
+  display: flex;
+  border-bottom: solid 4px #f7c934;
+  justify-content: space-between;
+  padding-top: 5px;
+  padding-inline: 10px;
+  background-color: #ffee00;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  font-weight: 800;
+}
+
+.detail-title {
+  font-size: 2em;
+  text-transform: capitalize;
+  color: #000000;
+  align-self: center;
+}
+
+.detail-hp {
+  align-self: center;
+  font-size: 1.5em;
+  color: #000000;
+}
+
+.detail-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 5px;
+  padding-inline: 20px;
+}
+
+.detail-img-container {
+  margin-block: 20px;
+  position: relative;
+  top: 10px;
+  width: 60%;
+  height: 250px;
+  overflow: hidden;
+  border: rgb(31, 30, 30) 4px solid;
+  border-radius: 3px;
+}
+
+.detail-background_img {
+  position: absolute;
+  z-index: 0;
+  overflow: hidden;
+  height: auto;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.detail-image {
+  position: absolute;
+  z-index: 1;
+  width: auto;
+  height: 90%;
+  top: 47%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.detail-abilities {
+  color: #000000;
+  padding-inline: 15px;
+  padding-top: 5px;
+  text-align: left;
+  font-size: 1.1em;
+  font-weight: 700;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+
+.detail-ab-list {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  color: #000000;
+  font-weight: 700;
+  padding-inline: 15px;
+  text-align: left;
+  font-size: 1.1em;
+  text-transform: uppercase;
+}
+
+.detail-type {
+  text-transform: uppercase;
+  color: #000000;
+  font-weight: 600;
+  font-size: 1.2rem;
+  padding-left: 35px;
+  display: flex;
+  justify-content: start;
+  align-content: flex-end;
+  padding-top: 5px;
+}
+
+.detail-description {
+  /* position: relative; */
+  width: 100%;
+  font-size: 1.05em;
+  color: #000000;
+  padding-inline: 35px;
+  padding-top: 20px;
+  text-align: left;
+}
+
+.detail-order {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  font-size: 0.8em;
+  font-weight: 800;
+  color: #ffffff;
+  background-color: #000000;
+  padding: 5px;
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.detail-info {
+  gap: 40px;
+  color: #000000;
+  padding-inline: 15px;
+  text-align: left;
+  font-size: 1.1em;
+  margin-top: 35px;
+  margin-bottom: 5px;
+}
+
+.detail-stats {
+  display: flex;
+  position: relative;
+  top: 215px;
+  flex: 1;
+  font-size: 1.1rem;
+  justify-content: space-between;
+  padding-inline: 20px;
+  padding-block: 2px;
+  color: #ffffff;
+  background-color: #00000075;
+}
+
+.detail-buttons {
+  /* position: relative; */
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 45px;
+}
+
+.detail-fgt,
+.detail-back {
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 1.2em;
+  font-weight: 800;
+  border: 3px solid #ffffff;
+  border-radius: 10px;
+  padding-block: 5px;
+  padding-inline: 20px;
+  box-shadow: 0px 0px 2px #000000d2;
+  &:hover {
+    scale: 1.05;
+    transition: ease-in-out 0.2s;
+    box-shadow: 0px 0px 5px #000000d2;
+  }
+}
+
+.detail-back {
+  background: #415d68;
+  background-image: url("../../assets/Pokedex_icon.svg");
+  background-size: 30px;
+  background-repeat: no-repeat;
+  background-position: 8px;
+  padding-left: 45px;
+  padding-right: 10px;
+}
+.detail-fgt {
+  background: #c50000;
+  background-image: url("../../assets/fight_icon.svg");
+  background-size: 30px;
+  background-repeat: no-repeat;
+  background-position: 8px;
+  padding-left: 45px;
+  padding-right: 10px;
+}

@@ -18,3 +18,12 @@ export const postErrorValidator = [
     .isLength({ min: 6 })
     .withMessage("password must be at least 6 characters long"),
 ];
+
+// Middleware to check if user is authenticated
+export const isAuthenticated = (req, res, next) => {
+  if (req.session.user) {
+    next();
+  } else {
+    res.status(401).json({ message: "Unauthorized" });
+  }
+};

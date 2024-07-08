@@ -1,0 +1,168 @@
+.pokecard {
+  position: relative;
+  background: linear-gradient(rgb(223, 90, 1), rgb(248, 229, 142)) padding-box,
+    linear-gradient(to right, darkblue, rgb(158, 19, 228)) border-box;
+  border: 8px solid transparent;
+  border-radius: 20px;
+  box-shadow: 0px 0px 10px #4336ffa2;
+  min-width: 300px;
+  max-width: 330px;
+  height: 430px;
+  /* text-align: center; */
+  font-family: "Roboto", sans-serif;
+  /* background-color: #f9f9f9; */
+  transform-origin: center;
+  opacity: 1;
+}
+
+.pokecard-header {
+  display: flex;
+  border-bottom: solid 4px #f7c934;
+  justify-content: space-between;
+  padding-top: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #ffee00;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  font-weight: 800;
+}
+
+.pokecard-title {
+  font-size: 1.2em;
+  align-self: center;
+  text-transform: capitalize;
+  max-width: 220px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #000000;
+}
+
+.pokecard-hp {
+  font-size: 1em;
+  font-weight: 400;
+  align-self: center;
+  color: #000000;
+}
+
+.pokecard-img-container {
+  position: relative;
+  top: 10px;
+  left: 16px;
+  width: 90%;
+  height: 200px;
+  overflow: hidden;
+  border: rgb(0, 0, 0) 4px solid;
+  border-radius: 3px;
+}
+
+.pokecard-background_img {
+  position: absolute;
+  z-index: 0;
+  height: auto;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.pokecard-image {
+  position: absolute;
+  z-index: 1;
+  width: auto;
+  height: 95%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.pokecard-order {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  font-size: 0.8em;
+  font-weight: 800;
+  color: #ffffff;
+  background-color: #000000;
+  padding: 5px;
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.pokecard-type {
+  position: relative;
+  top: 20px;
+  font-size: 1em;
+  font-weight: 500;
+  padding-left: 1.2rem;
+  text-transform: uppercase;
+  color: #000000;
+}
+
+.pokecard-description {
+  position: relative;
+  top: 20px;
+  line-height: 1rem;
+}
+
+.pokecard-stats {
+  position: relative;
+  top: 165px;
+  display: flex;
+  justify-content: space-between;
+  padding-block: 5px;
+  padding-right: 15px;
+  padding-left: 15px;
+  background-color: #0000005b;
+  border-radius: 5px;
+  box-shadow: #000000d0 0px 0px 5px;
+}
+
+.pokecard .pokecard-attack,
+.pokecard .pokecard-defense {
+  font-size: 0.9em;
+  color: #ffffff;
+}
+
+.pokecard-buttons {
+  position: relative;
+  top: 10px;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  padding-inline: 20px;
+  font-size: 1.2em;
+  font-weight: 800;
+}
+
+.pokecard-fgt,
+.pokecard-details {
+  cursor: pointer;
+  color: #ffffff;
+  border: 3px solid #ffffff;
+  border-radius: 10px;
+  padding-block: 2px;
+  padding-inline: 15px;
+  box-shadow: 0px 0px 3px #000000d2;
+  &:hover {
+    scale: 1.05;
+    transition: ease-in-out 0.2s;
+    box-shadow: 0px 0px 5px #000000d2;
+  }
+}
+
+.pokecard-fgt {
+  background: #c50000;
+  /* background-image: url("../assets/fight_icon.svg"); */
+  background-size: 30px;
+  background-repeat: no-repeat;
+  background-position: 5px;
+}
+
+.pokecard-details {
+  background: #356f81;
+  /* background-image: url("../assets/detail_icon.svg"); */
+  background-size: 30px;
+  background-repeat: no-repeat;
+  background-position: 8px;
+}
