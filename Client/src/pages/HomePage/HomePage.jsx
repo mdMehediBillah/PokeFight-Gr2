@@ -4,8 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import UserProfile from "../../Components/Header/UserProfile.jsx";
 import { useEffect } from "react";
-import { FaFacebookF, FaInstagram, FaTiktok } from "react-icons/fa6";
-import pokeIcon from "../../assets/favicon.png";
 import PokeCard from "../../Components/PokeCard.jsx";
 import Header from "../../Components/Header.jsx";
 import Footer from "../../Components/Footer.jsx";
@@ -147,6 +145,17 @@ const HomePage = () => {
           The best place to fight with Pokemon
         </motion.h2>
 
+        <motion.div
+          initial={{ y: 800, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ type: "tween", duration: 0.5, delay: 0.5 }}
+          className="container mx-auto  font-bold text-black m-6 "
+          onClick={() => window.location.reload()}
+        >
+          <span className="bg-cyan-200 py-2 px-4 rounded-xl hover:bg-cyan-400 hover:cursor-pointer">
+            More Pokemon
+          </span>
+        </motion.div>
         <motion.div
           initial={{ y: 800, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
