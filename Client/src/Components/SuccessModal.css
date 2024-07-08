@@ -1,0 +1,53 @@
+.modalBg {
+  width: 100vw !important;
+  height: 100vh !important;
+  background-color: rgba(0, 0, 0, 0.9);
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  z-index: 1000;
+}
+
+.modalContainer {
+  width: 50%;
+  max-width: 30rem;
+  /* height: 55%; */
+  /* max-height: 32rem; */
+  border-radius: 0.8rem !important;
+  background: linear-gradient(rgb(255, 220, 220), rgb(110, 0, 153)) padding-box,
+    linear-gradient(to right, darkblue, rgb(163, 10, 240)) border-box;
+  box-shadow: rgba(0, 0, 0, 0.8) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 1.6rem;
+  border: 8px solid rgb(171, 118, 3);
+}
+
+.loseModalContainer {
+  width: 50%;
+  max-width: 30rem;
+  /* height: 55%; */
+  /* max-height: 32rem; */
+  border-radius: 0.8rem !important;
+  background: linear-gradient(rgb(237, 159, 159), rgb(224, 0, 0)) padding-box,
+    linear-gradient(to right, darkblue, rgb(163, 10, 240)) border-box;
+  box-shadow: rgba(0, 0, 0, 0.8) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 1.6rem;
+  border: 8px solid rgb(171, 118, 3);
+}
+
+.titleCloseBtn {
+  display: flex;
+  justify-content: end;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: black;
+  border: none;
+}
+.modalImage {
+  width: 60%;
+  margin: auto;
+}

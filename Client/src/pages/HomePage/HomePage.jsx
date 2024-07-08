@@ -4,10 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import UserProfile from "../../Components/Header/UserProfile.jsx";
 import { useEffect } from "react";
-import { FaFacebookF, FaInstagram, FaTiktok } from "react-icons/fa6";
-import pokeIcon from "../../assets/favicon.png";
 import PokeCard from "../../Components/PokeCard.jsx";
 import Header from "../../Components/Header.jsx";
+import Footer from "../../Components/Footer.jsx";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -149,6 +148,17 @@ const HomePage = () => {
         <motion.div
           initial={{ y: 800, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
+          transition={{ type: "tween", duration: 0.5, delay: 0.5 }}
+          className="container mx-auto  font-bold text-black m-6 "
+          onClick={() => window.location.reload()}
+        >
+          <span className="bg-cyan-200 py-2 px-4 rounded-xl hover:bg-cyan-400 hover:cursor-pointer">
+            More Pokemon
+          </span>
+        </motion.div>
+        <motion.div
+          initial={{ y: 800, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
           transition={{ type: "tween", duration: 0.5, delay: 1.5 }}
           className="container grid sm:grid-cols-1 md:grid-cols-2 justify-center lg:grid-cols-3 xl:grid-cols-4 mx-auto gap-4"
         >
@@ -177,32 +187,7 @@ const HomePage = () => {
             <PokeCard />
           </div>
         </motion.div>
-        <motion.div
-          initial={{ y: 200, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ type: "tween", duration: 0.5, delay: 1.5 }}
-          className="container mx-auto py-10 flex justify-around items-end "
-        >
-          <div className="bg-cyan-900 rounded-lg text-center text-white text-sm text-black py-1 px-2 flex gap-3 items-center">
-            follow us:{" "}
-            <div className="flex gap-2 items-center">
-              <FaFacebookF /> <FaInstagram /> <FaTiktok />
-            </div>
-          </div>
-          <motion.div
-            animate={{
-              rotate: [0, 200, 200, 0, -200, -200, 0],
-              x: [0, 200, 200, 0, -200, -200, 0],
-            }}
-            transition={{ delay: 1.5, duration: 6, repeat: Infinity }}
-            className="bg-cyan-200 rounded-lg text-center text-sm text-black  bg-transparent"
-          >
-            <img src={pokeIcon} alt="icon" className="w-10 h-10" />
-          </motion.div>
-          <div className="bg-cyan-900 rounded-lg text-center text-white text-sm text-black py-1 px-2">
-            All rights reserved @pokeFight.com
-          </div>
-        </motion.div>
+        <Footer />
       </div>
     </motion.div>
   );

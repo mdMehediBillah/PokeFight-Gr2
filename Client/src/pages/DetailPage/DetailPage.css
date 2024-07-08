@@ -184,7 +184,7 @@
 }
 
 .detail-buttons {
-  position: relative;
+  /* position: relative; */
   display: flex;
   justify-content: center;
   gap: 40px;

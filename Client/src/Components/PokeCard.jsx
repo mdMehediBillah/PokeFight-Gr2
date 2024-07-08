@@ -23,56 +23,6 @@ const PokeCard = () => {
 
     fetchData();
   }, []);
-  //   const fetchRandomPokemon = async () => {
-  //     // Generate a random Pokemon ID between 1 and 898 (inclusive)
-  //     const randomPokemonId = Math.floor(Math.random() * 898) + 1;
-
-  //     try {
-  //       const response = await axios.get(
-  //         `https://pokeapi.co/api/v2/pokemon/${randomPokemonId}`
-  //       );
-  //       const pokemonData = response.data;
-
-  //       const speciesResponse = await axios.get(
-  //         `https://pokeapi.co/api/v2/pokemon-species/${randomPokemonId}`
-  //       );
-  //       const speciesData = speciesResponse.data;
-  //       const description = speciesData.flavor_text_entries.find(
-  //         (entry) => entry.language.name === "en"
-  //       ).flavor_text;
-
-  //       // Create a structured Pokemon object
-  //       const formattedPokemon = {
-  //         id: pokemonData.id,
-  //         name: pokemonData.name,
-  //         order: pokemonData.order,
-  //         stats: {
-  //           hp: pokemonData.stats.find((stat) => stat.stat.name === "hp")
-  //             .base_stat,
-  //           attack: pokemonData.stats.find(
-  //             (stat) => stat.stat.name === "attack"
-  //           ).base_stat,
-  //           defense: pokemonData.stats.find(
-  //             (stat) => stat.stat.name === "defense"
-  //           ).base_stat,
-  //         },
-  //         abilities: pokemonData.abilities,
-  //         height: pokemonData.height,
-  //         weight: pokemonData.weight,
-  //         species: pokemonData.species.url,
-  //         image: pokemonData.sprites.other["official-artwork"].front_default,
-  //         types: pokemonData.types,
-  //         description: description,
-  //       };
-
-  //       setPokemonData(formattedPokemon);
-  //     } catch (error) {
-  //       console.error("Error fetching random pokemon:", error);
-  //     }
-  //   };
-
-  //   fetchRandomPokemon();
-  // }, []); // Empty dependency array to run useEffect only once on component mount
 
   if (!pokemonData) {
     return <div>Loading...</div>;
@@ -106,7 +56,8 @@ const PokeCard = () => {
               className="pokecard-background_img"
             />
           </div>
-          <img className="pokecard-image" src={image} alt={name} />
+          <img className="pokecard-image h-[60%]" src={image2} alt={name} />
+          {/* <img className="pokecard-image" src={image} alt={name} /> */}
           <p className="pokecard-order">{order}</p>
           <div className="pokecard-stats">
             <span className="pokecard-attack">Attack: {stats.attack}</span>
